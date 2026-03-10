@@ -1,5 +1,5 @@
-title: 0x22ff Blog
-description: Personal notes and dev logs
+title: 0x22ff Journal
+description: Engineering notes, production logs, and build diaries.
 url: https://0x22ff.github.io
 baseurl: ""
 lang: ko-KR
@@ -9,3 +9,5 @@ plugins:
   - jekyll-seo-tag
 markdown: kramdown
 permalink: /:categories/:year/:month/:day/:title/
+header_pages:
+  - about.md
