@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "BSSJ 아키텍처 한눈에 보기 (2026-03 기준)"
-date: 2026-03-10 23:10:00 +0900
+date: 2026-03-10 09:10:00 +0900
 categories: [architecture]
 tags: [spring-boot, vue, mysql, aws, nginx, monorepo]
 ---
