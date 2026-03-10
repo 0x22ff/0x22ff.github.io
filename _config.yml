@@ -1,0 +1,11 @@
+title: 0x22ff Blog
+description: Personal notes and dev logs
+url: https://0x22ff.github.io
+baseurl: ""
+lang: ko-KR
+theme: minima
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+markdown: kramdown
+permalink: /:categories/:year/:month/:day/:title/
