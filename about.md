@@ -4,30 +4,30 @@ title: About
 permalink: /about/
 ---
 
-<section class="about-hero reveal">
-  <p class="hero-kicker">ABOUT THIS BLOG</p>
-  <h1>0x22ff Journal</h1>
-  <p>
-    이 블로그는 실제 프로젝트에서 마주친 기술 의사결정과 운영 이슈를 기록합니다.
-    단순 튜토리얼보다, 실무에서 바로 참고할 수 있는 맥락 중심 정리를 목표로 합니다.
+<section class="hero-shell fade-in">
+  <p class="micro-label">About</p>
+  <h1>실무에서 바로 참고 가능한 기록을 남깁니다.</h1>
+  <p class="hero-summary">
+    튜토리얼보다 실제 운영 상황의 맥락을 우선합니다.
+    문제 정의, 가설, 검증, 수정, 회고 순서로 정리합니다.
   </p>
 </section>
 
-<section class="about-grid reveal">
-  <article class="about-card">
-    <h2>무엇을 쓰나요</h2>
+<section class="about-layout fade-in">
+  <article>
+    <h2>다루는 주제</h2>
     <ul>
-      <li>Spring Boot / Java 백엔드 구현 메모</li>
-      <li>배포 자동화와 인프라 운영 로그</li>
-      <li>트러블슈팅 원인 분석과 해결 과정</li>
+      <li>Spring Boot / Java 백엔드 구현</li>
+      <li>배포 자동화와 서버 운영</li>
+      <li>장애 분석과 성능 개선</li>
     </ul>
   </article>
-  <article class="about-card">
-    <h2>어떻게 정리하나요</h2>
+  <article>
+    <h2>기록 방식</h2>
     <ul>
-      <li>문제 상황을 먼저 기록</li>
-      <li>가설과 검증 과정을 분리</li>
-      <li>재발 방지 체크리스트로 마무리</li>
+      <li>문제 현상과 영향 범위 명확화</li>
+      <li>원인 가설과 검증 로그 분리</li>
+      <li>적용 결과와 다음 액션 정리</li>
     </ul>
   </article>
 </section>
