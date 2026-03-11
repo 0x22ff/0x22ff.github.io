@@ -1,179 +1,172 @@
 ---
 layout: post
-title: "BSSJ 아키텍처 정리 (왜 지금 이렇게 구성했는지)"
+title: "BSSJ 아키텍처, 지금 구조를 이렇게 잡은 이유"
 date: 2026-03-10 09:10:00 +0900
 categories: [architecture]
 tags: [spring-boot, vue, mysql, aws, nginx, monorepo]
 ---
 
-이번 글은 `docs/architecture.md` 기준으로 다시 정리했다.  
-문서 톤 말고, 실제로 왜 이렇게 짰는지 운영 관점으로 풀어보면 아래랑 같다.
+이번 글은 `docs/architecture.md`(최종 수정일 2026-03-09) 기준으로, 현재 BSSJ 구조를 실제 운영 관점에서 정리한 내용이다.
 
-## TL;DR
+문서 요약만 복붙한 게 아니라, 왜 이렇게 설계했는지까지 같이 적어본다.
 
-지금 BSSJ 구조를 한 줄로 말하면 이거다.
+## 한 번에 보는 전체 구조
 
-- FE는 `Web`/`CMS`를 분리해서 경험을 나눔
-- BE는 `Spring Boot` 단일 프로세스로 통합해서 운영비를 줄임
-- 데이터는 `MySQL`, 파일은 `S3`로 책임 분리
-- 인증은 CMS만 JWT, 공개 API는 오픈
+![BSSJ 전체 아키텍처](/assets/images/bssj-architecture-overview.svg)
 
-즉, "화면은 분리, 서버 런타임은 통합" 전략이다.
+핵심은 딱 두 줄이다.
 
-## 1) 시스템을 어떻게 쪼갰는지
+- 화면(Web/CMS)은 분리해서 UX를 명확히 가져간다.
+- 서버 런타임은 통합해서 운영 비용과 복잡도를 줄인다.
 
-서비스는 크게 두 사용자군이다.
+즉, "프론트는 분리, 백엔드는 통합" 전략이다.
 
-1. 일반 방문자: 교회 소개/영상/게시판 보는 사용자
-2. 관리자: CMS에서 콘텐츠 등록/수정하는 사용자
+## 먼저 요구사항부터
 
-구성은 이렇게 잡았다.
+서비스 관점에서 사용자 성격이 다르다.
 
-```text
-브라우저
-  ├─ Public Web (Vue 3 + TS)
-  └─ CMS        (Vue 3 + TS)
-          │
-          ▼
-        Nginx :80
-  ├─ /*             -> Web 정적 파일
-  ├─ cms.*/*        -> CMS 정적 파일
-  ├─ /api/*         -> Backend :8080
-  └─ /cms/*         -> Backend :8080
-          │
-          ▼
-Unified Backend (Spring Boot 3.x)
-  ├─ /api/* (공개 조회)
-  └─ /cms/* (JWT 인증)
-          │
-          ├─ MySQL 8.0
-          └─ AWS S3
-```
+1. 방문자: 교회 정보/영상/게시판을 보는 사용자
+2. 관리자: CMS에서 콘텐츠를 등록/수정하는 사용자
 
-포인트는, FE는 나눴지만 BE 프로세스는 하나라는 점이다.
+이 둘의 화면 경험은 완전히 달라야 해서 FE는 분리(`apps/web/frontend`, `apps/cms/frontend`)했다.
 
-## 2) 모노레포 모듈 구조
+반대로 BE는 운영 단순성이 더 중요해서, Spring Boot를 하나로 통합했다.
 
-백엔드는 멀티모듈인데, 실행 앱은 하나다.
+- 공개 API: `/api/*`
+- CMS API: `/cms/*`
+- 단일 포트: `:8080`
 
-```text
-apps/
-├── web/backend        # 실제 실행 앱 (bootRun 대상)
-├── cms/backend        # java-library (단독 실행 X)
-└── common/
-    ├── core           # 공통 유틸
-    └── mysql          # 엔티티/리포지토리/DB/Flyway
-```
+## 요청 흐름은 이렇게 돈다
 
-의존 관계는 이렇다.
+### 방문자 요청
+
+1. 사용자가 Public Web 접속
+2. Nginx가 정적 리소스 제공
+3. 화면에서 `/api/*` 호출
+4. Unified Backend가 MySQL 조회 후 JSON 응답
+
+### 관리자 요청
+
+1. 관리자가 CMS 접속
+2. Nginx가 CMS 정적 리소스 제공
+3. 로그인 시 `POST /cms/auth/login`으로 JWT 발급
+4. 이후 `/cms/*` 호출 시 Bearer 토큰 검증
+5. 데이터는 MySQL, 파일은 S3에 저장
+
+여기서 중요한 건, 관리자 API만 인증이 걸려 있다는 점이다.
+
+## 백엔드 모듈 구조 (실제로는 이게 핵심)
+
+![BSSJ 모듈 의존 구조](/assets/images/bssj-module-dependency.svg)
+
+문서 기준 모듈은 아래 4개다.
+
+- `apps:web:backend`
+- `apps:cms:backend`
+- `apps:common:mysql`
+- `apps:common:core`
+
+의존 관계는 이렇게 정리된다.
 
 - `web/backend` -> `cms/backend`
 - `web/backend` -> `common/mysql` -> `common/core`
 - `cms/backend` -> `common/mysql`
 
-이렇게 둔 이유는 간단하다.
+중요 포인트:
 
-- 프로세스는 1개로 유지해서 서버 메모리/운영 복잡도 줄이고
-- 코드 경계는 모듈로 나눠서 확장 여지를 남긴다
+- `web/backend`만 실행 모듈이다.
+- `cms/backend`는 `java-library`라 단독 실행하지 않는다.
+- `./gradlew :apps:web:backend:bootRun`으로 기동하면 `/api`와 `/cms`가 같이 열린다.
 
-## 3) 패키지 구조는 도메인 기준
+처음 보면 "왜 굳이 합쳤지?" 싶지만, 현재 운영 리소스(단일 EC2) 기준에선 꽤 합리적이다.
 
-레이어(controller/service/repository) 기준으로 쪼개면 파일이 흩어져서, 지금은 도메인 기준으로 모았다.
+## 패키지 구조는 레이어가 아니라 도메인 기준
 
-`com.bssj.webapi` 쪽 대표 도메인:
+예전처럼 controller/service/repository를 전역으로 나누면, 수정할 때 파일 점프가 너무 많아진다.
 
-- `settings` (메인페이지 설정)
-- `video` (sermon/shorts)
-- `content` (bulletin/column/gallery)
-- `churchinfo` (staff/worship-time/location/history)
-- `menu`, `modal`, `manager`
-- `common` (보안/헬스체크/이미지 다운로드)
+그래서 2026-03 기준으로 도메인 중심 구조로 전환했다.
 
-`com.bssj.cms` 쪽 대표 도메인:
+### `com.bssj.webapi`
 
-- `auth` (로그인/JWT)
-- `video`, `bulletin`, `menu`, `staff`, `worshiptime`, `mainpage`
-- `upload` (S3 업로드)
-- `bible` (조회/검색)
-- `manager` (여기는 hexagonal 구조로 domain/port/infra 분리)
+- `video`, `content`, `churchinfo`, `settings`, `menu`, `modal`, `manager`, `common`
 
-실무에서 장점은, 한 도메인 수정할 때 이동 경로가 짧다는 점이다.
+### `com.bssj.cms`
 
-## 4) API 규칙 (가장 중요한 부분)
+- `auth`, `video`, `bulletin`, `menu`, `staff`, `worshiptime`, `mainpage`, `upload`, `bible`, `manager`, `common`
 
-경로 규칙은 명확하게 분리했다.
+특히 `cms/manager`는 `domain/port/infra`로 나눠서 hexagonal 아키텍처를 적용했다.
 
-- Public API: `/api/*`
-- CMS API: `/cms/*`
+## 보안/권한 설계
 
-인증 정책도 다르게 가져간다.
+문서 기준 정책은 명확하다.
 
-- `/api/*`는 공개 조회라서 인증 없음
-- `/cms/*`는 JWT 필수 (`/cms/auth/**` 제외)
+- Web API (`/api/*`): 인증 없음(공개 조회)
+- CMS API (`/cms/*`): JWT 인증 필수 (`/cms/auth/**` 제외)
 
-대표 엔드포인트는 아래 정도만 기억해도 된다.
+그리고 JWT에 `cid`(churchId)를 넣어서 교회 단위 데이터 격리를 가져간다.
 
-- `POST /cms/auth/login` (토큰 발급)
-- `GET /api/sermons`, `GET /api/shorts`
-- `GET /api/bulletins`, `GET /api/columns`
-- `GET /api/main-page/settings`, `GET /api/menus`
-- `POST /cms/upload/image` (S3 업로드)
+이 부분이 중요한 이유는, BSSJ가 단일 교회 사이트를 넘어서 멀티 교회 확장 가능성을 고려하기 때문이다.
 
-멀티 교회 대응 때문에 JWT에 `cid`(churchId)도 포함한다.  
-핵심은 "로그인은 하나로 하되, 데이터는 church 단위로 분리"다.
+## 데이터 계층
 
-## 5) 데이터/스토리지
-
-현재 데이터 레이어는 안정적인 조합으로 갔다.
-
-- DB: MySQL 8.0 (`utf8mb4`)
-- ORM: JPA/Hibernate
+- DB: MySQL 8.0 (`utf8mb4`, ngram 전문검색)
 - 마이그레이션: Flyway (`V1 ~ V12`)
-- 파일: AWS S3 (이미지)
+- 파일: AWS S3 (ap-northeast-2)
 
-정리하면, 정형 데이터는 DB, 바이너리 파일은 S3.  
-역할을 명확히 나눠서 백엔드 메모리 부담을 줄이고 운영도 단순화했다.
+정리하면,
 
-## 6) 인프라와 배포
+- 정형 데이터 -> MySQL
+- 이미지/파일 -> S3
 
-현재는 EC2 단일 인스턴스(`t3.small`) 운영이다.
+이렇게 책임을 나눠서 앱 메모리 부담과 운영 리스크를 낮췄다.
 
-- Nginx: 정적 파일 + API 프록시
-- Backend: 8080 단일 앱
+## 인프라/배포
+
+현재 운영 기준은 단일 EC2(t3.small)다.
+
+- Nginx: 정적 파일 서빙 + 리버스 프록시
+- Backend: Unified Spring Boot `:8080`
 - MySQL: 로컬
 - S3: 외부 스토리지
 
 CI/CD는 GitHub Actions로 분리했다.
 
-- CI (`develop` 대상 PR): 백엔드 테스트 + FE 빌드
-- CD (`main` push): 빌드 -> 전송 -> EC2 배포 -> 서비스 재기동
+- CI(`develop` PR): 백엔드 테스트 + FE 빌드
+- CD(`main` push): 빌드 -> SCP 전송 -> EC2 반영 -> `systemctl restart`
 
-환경 프로필은 `local`, `beta`, `release`를 잡아뒀고, 문서 기준 `release`는 아직 미사용 상태다.
+환경 프로필은 `local`, `beta`, `release`이고, 문서 기준으로 `release`는 아직 미사용 상태다.
 
-## 7) 왜 굳이 "통합 백엔드"로 갔는가
+## 이 구조의 장단점
 
-초기/성장 구간에서는 이게 꽤 현실적인 선택이었다.
+### 장점
 
-1. JVM/Tomcat/Hikari를 두 벌 안 띄워도 된다
-2. 배포 타깃이 1개라 장애 포인트가 줄어든다
-3. 서버 자원(t3.small)에서 운영하기 유리하다
+1. 운영 단순성: 프로세스 하나로 배포/모니터링 포인트 감소
+2. 비용 절감: JVM/Tomcat/Hikari 이중화 제거
+3. 개발 속도: FE 분리로 팀 작업 충돌 감소
 
-대신 trade-off도 있다.
+### 단점(주의할 점)
 
-1. 코드 경계 관리 못하면 앱이 비대해질 수 있음
-2. API 정책 통일이 느슨하면 `/api`와 `/cms`가 섞일 위험이 있음
+1. 통합 앱이라 경계 관리 실패 시 빠르게 비대화됨
+2. `/api`와 `/cms` 정책 분리를 느슨하게 하면 보안 사고 위험
 
-그래서 지금은 "프로세스는 통합, 모듈 경계는 강하게"를 기준으로 관리 중이다.
+그래서 지금 기준 운영 원칙은 이거다.
 
-## 8) 다음에 바로 손볼 것
+- 프로세스는 통합
+- 모듈 경계는 강하게
+- 인증 정책은 URL 규칙으로 강제
 
-지금 기준으로 우선순위는 이렇게 본다.
+## 다음 단계
 
-1. CMS 업로드를 presigned URL 기반으로 전환
-2. Swagger 그룹/보안정책을 `/api`와 `/cms` 기준으로 명확히 분리
-3. 멀티교회 권한 모델(전역 관리자 vs 교회 관리자) 구체화
+문서와 현재 운영 상황 기준으로, 다음 우선순위는 아래가 맞다.
+
+1. CMS 업로드를 presigned URL 중심으로 전환
+2. Swagger를 `/api`와 `/cms` 기준으로 그룹 명확화
+3. 멀티교회 권한 모델(전역 관리자/교회 관리자) 구체화
 
 ---
 
-정리하면, BSSJ는 "큰 구조를 빨리 고정하고, 운영비를 낮추는" 쪽으로 설계했다.  
-완벽한 분산 구조를 처음부터 가기보다, 지금 필요한 속도와 안정성을 먼저 챙긴 형태라고 보면 된다.
+한 줄 정리하면,
+
+지금 BSSJ 아키텍처는 "처음부터 거대한 분산 시스템"을 노린 구조가 아니라, **작은 팀이 실제로 운영 가능한 구조를 먼저 고정한 설계**다.
+
+그리고 그 위에 확장을 얹을 수 있게, 모듈 경계와 도메인 경계는 계속 지키는 방향으로 가고 있다.

@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="780" viewBox="0 0 1200 780" role="img" aria-labelledby="title desc">
+  <title id="title">BSSJ Architecture Overview</title>
+  <desc id="desc">Frontend Web and CMS route through Nginx to unified backend with MySQL and S3.</desc>
+  <defs>
+    <style>
+      .bg { fill: #f7f9fd; }
+      .box { fill: #ffffff; stroke: #cfd8e6; stroke-width: 2; rx: 14; ry: 14; }
+      .group { fill: #f0f4fb; stroke: #c4d0e5; stroke-width: 2; rx: 18; ry: 18; }
+      .title { font: 700 24px 'Pretendard', 'Segoe UI', sans-serif; fill: #1f2a44; }
+      .label { font: 600 18px 'Pretendard', 'Segoe UI', sans-serif; fill: #24324f; }
+      .text { font: 500 15px 'Pretendard', 'Segoe UI', sans-serif; fill: #4b5a77; }
+      .badge { fill: #e8efff; stroke: #b6c8f6; stroke-width: 1.5; rx: 10; ry: 10; }
+      .badgeText { font: 600 13px 'JetBrains Mono', monospace; fill: #3559c7; }
+      .arrow { stroke: #6e86b3; stroke-width: 2.5; fill: none; marker-end: url(#arrowhead); }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#6e86b3" />
+    </marker>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="1200" height="780"/>
+  <text class="title" x="40" y="52">BSSJ Architecture (2026-03)</text>
+
+  <rect class="group" x="40" y="90" width="1120" height="170"/>
+  <text class="label" x="65" y="125">Frontend</text>
+
+  <rect class="box" x="90" y="145" width="430" height="90"/>
+  <text class="label" x="115" y="180">Public Web (Vue 3 + TypeScript)</text>
+  <text class="text" x="115" y="208">교회 공개 사이트 (방문자용)</text>
+
+  <rect class="box" x="680" y="145" width="430" height="90"/>
+  <text class="label" x="705" y="180">CMS (Vue 3 + TypeScript)</text>
+  <text class="text" x="705" y="208">관리자 콘텐츠 관리 화면</text>
+
+  <rect class="group" x="270" y="300" width="660" height="110"/>
+  <text class="label" x="300" y="338">Nginx :80 (Reverse Proxy + Static Serving)</text>
+  <rect class="badge" x="300" y="352" width="130" height="34"/>
+  <text class="badgeText" x="326" y="374">/api/*</text>
+  <rect class="badge" x="442" y="352" width="130" height="34"/>
+  <text class="badgeText" x="468" y="374">/cms/*</text>
+  <rect class="badge" x="584" y="352" width="130" height="34"/>
+  <text class="badgeText" x="612" y="374">/*</text>
+  <rect class="badge" x="726" y="352" width="175" height="34"/>
+  <text class="badgeText" x="752" y="374">cms.*/*</text>
+
+  <rect class="group" x="170" y="450" width="860" height="170"/>
+  <text class="label" x="200" y="485">Unified Backend :8080 (Spring Boot 3.x)</text>
+
+  <rect class="box" x="220" y="510" width="360" height="90"/>
+  <text class="label" x="245" y="545">Web API Module</text>
+  <text class="text" x="245" y="573">/api/*, 공개 조회 API</text>
+
+  <rect class="box" x="620" y="510" width="360" height="90"/>
+  <text class="label" x="645" y="545">CMS API Module</text>
+  <text class="text" x="645" y="573">/cms/*, JWT 인증 API</text>
+
+  <rect class="box" x="230" y="665" width="290" height="80"/>
+  <text class="label" x="255" y="703">MySQL 8.0</text>
+  <text class="text" x="255" y="727">정형 데이터 저장</text>
+
+  <rect class="box" x="680" y="665" width="290" height="80"/>
+  <text class="label" x="705" y="703">AWS S3</text>
+  <text class="text" x="705" y="727">이미지 파일 저장</text>
+
+  <path class="arrow" d="M305 235 L440 300"/>
+  <path class="arrow" d="M895 235 L760 300"/>
+  <path class="arrow" d="M600 410 L600 450"/>
+  <path class="arrow" d="M420 600 L375 665"/>
+  <path class="arrow" d="M780 600 L825 665"/>
+</svg>

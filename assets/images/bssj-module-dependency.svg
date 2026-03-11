@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="460" viewBox="0 0 1000 460" role="img" aria-labelledby="title desc">
+  <title id="title">BSSJ Backend Module Dependency</title>
+  <desc id="desc">Dependency graph showing web backend depends on cms backend and common modules.</desc>
+  <defs>
+    <style>
+      .bg { fill: #f7f9fd; }
+      .box { fill: #ffffff; stroke: #cfd8e6; stroke-width: 2; rx: 14; ry: 14; }
+      .title { font: 700 24px 'Pretendard', 'Segoe UI', sans-serif; fill: #1f2a44; }
+      .label { font: 700 20px 'Pretendard', 'Segoe UI', sans-serif; fill: #233350; }
+      .text { font: 500 14px 'Pretendard', 'Segoe UI', sans-serif; fill: #4b5a77; }
+      .arrow { stroke: #6e86b3; stroke-width: 2.5; fill: none; marker-end: url(#arrowhead); }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#6e86b3" />
+    </marker>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="1000" height="460"/>
+  <text class="title" x="40" y="52">Backend Module Dependency</text>
+
+  <rect class="box" x="80" y="120" width="280" height="110"/>
+  <text class="label" x="110" y="162">apps:web:backend</text>
+  <text class="text" x="110" y="190">실행 엔트리포인트</text>
+  <text class="text" x="110" y="212">Web API + CMS API 통합 기동</text>
+
+  <rect class="box" x="400" y="120" width="250" height="110"/>
+  <text class="label" x="430" y="162">apps:cms:backend</text>
+  <text class="text" x="430" y="190">java-library</text>
+  <text class="text" x="430" y="212">단독 실행 불가</text>
+
+  <rect class="box" x="400" y="290" width="250" height="110"/>
+  <text class="label" x="430" y="332">apps:common:mysql</text>
+  <text class="text" x="430" y="360">Entity/Repository/Flyway</text>
+
+  <rect class="box" x="710" y="290" width="220" height="110"/>
+  <text class="label" x="740" y="332">apps:common:core</text>
+  <text class="text" x="740" y="360">공통 유틸리티</text>
+
+  <path class="arrow" d="M360 160 L400 160"/>
+  <path class="arrow" d="M360 190 L400 332"/>
+  <path class="arrow" d="M650 332 L710 332"/>
+  <path class="arrow" d="M520 230 L520 290"/>
+
+  <text class="text" x="80" y="430">bootRun 기준 실행 모듈은 apps:web:backend 하나</text>
+</svg>
