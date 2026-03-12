@@ -3,11 +3,21 @@ description: Engineering notes, production logs, and build diaries.
 url: https://0x22ff.github.io
 baseurl: ""
 lang: ko-KR
+locale: ko_KR
+timezone: Asia/Seoul
 theme: minima
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
+  - jekyll-sitemap
 markdown: kramdown
 permalink: /:categories/:year/:month/:day/:title/
+
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
 header_pages:
   - worklog.md
