@@ -7,6 +7,7 @@ permalink: /about/
 <section class="v-about">
   <section class="v-tabs" aria-label="navigation tabs">
     <a href="/">글</a>
+    <a href="/worklog/">작업일지</a>
     <a class="active" href="/about/">소개</a>
   </section>
 

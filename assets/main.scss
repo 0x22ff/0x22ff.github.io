@@ -264,6 +264,117 @@ a:visited {
   margin-top: 0.42rem;
 }
 
+.v-worklog {
+  border-radius: 16px;
+}
+
+.wl-header {
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--panel);
+  box-shadow: var(--shadow);
+  padding: 1.2rem 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.wl-header h1 {
+  margin: 0;
+  font-size: 1.55rem;
+  letter-spacing: -0.03em;
+}
+
+.wl-header p {
+  margin: 0.66rem 0 0;
+  color: var(--muted);
+  line-height: 1.62;
+}
+
+.wl-stats {
+  margin-top: 0.9rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.wl-stats span {
+  border-radius: 999px;
+  border: 1px solid #cfdcff;
+  background: #eef3ff;
+  color: #3559c7;
+  padding: 0.26rem 0.65rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  font-family: "JetBrains Mono", monospace;
+}
+
+.wl-timeline {
+  list-style: none;
+  margin: 0;
+  padding: 0.2rem 0 0 0;
+  position: relative;
+}
+
+.wl-timeline::before {
+  content: "";
+  position: absolute;
+  left: 12px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg, #b9c8ea 0%, #d6dff0 100%);
+}
+
+.wl-item {
+  position: relative;
+  padding-left: 2rem;
+  margin-bottom: 0.85rem;
+}
+
+.wl-item:last-child {
+  margin-bottom: 0;
+}
+
+.wl-dot {
+  position: absolute;
+  left: 4px;
+  top: 1.15rem;
+  width: 16px;
+  height: 16px;
+  border-radius: 999px;
+  border: 3px solid #ffffff;
+  background: var(--brand);
+  box-shadow: 0 0 0 1px #98b0e8;
+}
+
+.wl-card {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--panel);
+  box-shadow: var(--shadow);
+  padding: 0.9rem 1rem;
+}
+
+.wl-card h3 {
+  margin: 0.16rem 0 0;
+  font-size: 1.05rem;
+  letter-spacing: -0.015em;
+  line-height: 1.35;
+}
+
+.wl-card p {
+  margin: 0.52rem 0 0;
+  color: var(--muted);
+  line-height: 1.62;
+}
+
+.wl-date {
+  margin: 0;
+  color: #5271c6;
+  font-size: 0.78rem;
+  font-family: "JetBrains Mono", monospace;
+  font-weight: 700;
+}
+
 .post,
 .post-content,
 .post-title {
@@ -310,5 +421,23 @@ pre {
 
   .v-thumb {
     height: 150px;
+  }
+
+  .wl-header {
+    padding: 1rem;
+  }
+
+  .wl-item {
+    padding-left: 1.75rem;
+  }
+
+  .wl-dot {
+    left: 3px;
+    width: 14px;
+    height: 14px;
+  }
+
+  .wl-card {
+    padding: 0.82rem 0.9rem;
   }
 }

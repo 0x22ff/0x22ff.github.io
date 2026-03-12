@@ -10,4 +10,5 @@ plugins:
 markdown: kramdown
 permalink: /:categories/:year/:month/:day/:title/
 header_pages:
+  - worklog.md
   - about.md
