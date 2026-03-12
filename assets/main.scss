@@ -307,6 +307,41 @@ a:visited {
   font-family: "JetBrains Mono", monospace;
 }
 
+.wl-project {
+  margin-bottom: 1rem;
+}
+
+.wl-project-label {
+  margin: 0 0 0.48rem;
+  color: var(--muted);
+  font-size: 0.84rem;
+  font-weight: 700;
+}
+
+.wl-project-tabs {
+  display: flex;
+  gap: 0.45rem;
+}
+
+.wl-project-tabs button {
+  border: 1px solid #cfdcff;
+  border-radius: 999px;
+  background: #f6f9ff;
+  color: #5a6e9f;
+  padding: 0.35rem 0.82rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  font-family: "JetBrains Mono", monospace;
+  cursor: default;
+}
+
+.wl-project-tabs button.active {
+  background: #e9f0ff;
+  color: #2d57c0;
+  border-color: #abc2f4;
+  box-shadow: inset 0 0 0 1px rgba(47, 109, 246, 0.12);
+}
+
 .wl-timeline {
   list-style: none;
   margin: 0;
@@ -373,6 +408,19 @@ a:visited {
   font-size: 0.78rem;
   font-family: "JetBrains Mono", monospace;
   font-weight: 700;
+}
+
+.wl-project-chip {
+  display: inline-block;
+  margin-top: 0.3rem;
+  border-radius: 999px;
+  border: 1px solid #c7d6f7;
+  background: #eef3ff;
+  color: #2f5cc4;
+  padding: 0.14rem 0.48rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  font-family: "JetBrains Mono", monospace;
 }
 
 .post,
