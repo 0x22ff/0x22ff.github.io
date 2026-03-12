@@ -32,8 +32,6 @@ title: 글
 
         <div class="v-meta">
           <span>{{ post.date | date: "%Y년 %-m월 %-d일" }}</span>
-          <span>·</span>
-          <span>1 min read</span>
         </div>
       </div>
     </a>
