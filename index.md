@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Home
+title: 글
 ---
 
 <section class="v-profile">

@@ -20,4 +20,5 @@ defaults:
     values:
       layout: post
 header_pages:
+  - index.md
   - worklog.md
