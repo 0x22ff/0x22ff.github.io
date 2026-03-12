@@ -6,6 +6,7 @@ lang: ko-KR
 locale: ko_KR
 timezone: Asia/Seoul
 theme: minima
+google_analytics: G-GX6XVVCNGS
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
