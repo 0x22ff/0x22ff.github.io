@@ -13,7 +13,7 @@ permalink: /worklog/
   <header class="wl-header">
     <h1>작업일지 Timeline</h1>
     <p>프로젝트별로 묶어서 흐름을 볼 수 있게 정리한 작업일지입니다. BSSJ 개발 기록과 블로그 운영 기록을 탭으로 구분했습니다.</p>
-    <div class="wl-stats"><span>총 항목 43개</span><span>BSSJ 38개</span><span>기타 5개</span><span>기간 2024-12-25 ~ 2026-03-12</span></div>
+    <div class="wl-stats"><span>총 항목 45개</span><span>BSSJ 38개</span><span>기타 7개</span><span>기간 2024-12-25 ~ 2026-03-12</span></div>
   </header>
 
   <section class="wl-project">
@@ -25,6 +25,24 @@ permalink: /worklog/
   </section>
 
   <ol class="wl-timeline">
+    <li class="wl-item" data-project="misc">
+      <div class="wl-dot" aria-hidden="true"></div>
+      <article class="wl-card">
+        <p class="wl-date">2026-03-12</p>
+        <span class="wl-project-chip">GitHub Blog</span>
+        <h3>GitHub Blog · Spring WebFlux 비동기 가이드 포스팅</h3>
+        <p>WebFlux 비동기 핵심 개념을 입문자도 끝까지 따라갈 수 있게 재구성한 글을 작성했다. Mono/Flux, 이벤트 루프, WebClient 병렬 호출, Backpressure를 실전 예시와 다이어그램 중심으로 정리했다.</p>
+      </article>
+    </li>
+    <li class="wl-item" data-project="misc">
+      <div class="wl-dot" aria-hidden="true"></div>
+      <article class="wl-card">
+        <p class="wl-date">2026-03-12</p>
+        <span class="wl-project-chip">GitHub Blog</span>
+        <h3>GitHub Blog · WebFlux BlockHound 실전 가이드 포스팅</h3>
+        <p>BlockHound를 왜 쓰는지부터 테스트 적용, 실패 재현, 수정 패턴, 롤아웃 전략까지 실무 관점으로 정리한 글을 작성했다. 블로킹 탐지 흐름을 이해하기 쉽도록 다이어그램을 다수 추가했다.</p>
+      </article>
+    </li>
     <li class="wl-item" data-project="misc">
       <div class="wl-dot" aria-hidden="true"></div>
       <article class="wl-card">
