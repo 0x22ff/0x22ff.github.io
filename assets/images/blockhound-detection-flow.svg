@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" role="img" aria-labelledby="t d">
+  <title id="t">BlockHound detection flow</title>
+  <desc id="d">Shows how BlockHound instruments methods and throws BlockingOperationError on non-blocking threads.</desc>
+  <defs>
+    <style>
+      .bg{fill:#f7f9fd}.panel{fill:#fff;stroke:#cfd8e6;stroke-width:2;rx:14;ry:14}
+      .head{font:700 24px 'Pretendard','Segoe UI',sans-serif;fill:#1f2a44}
+      .title{font:700 18px 'Pretendard','Segoe UI',sans-serif;fill:#24324f}
+      .txt{font:500 14px 'Pretendard','Segoe UI',sans-serif;fill:#4b5a77}
+      .node{fill:#eef4ff;stroke:#b7c9ef;stroke-width:1.8;rx:10;ry:10}
+      .err{fill:#fff1f1;stroke:#efb3b3;stroke-width:1.8;rx:10;ry:10}
+      .ok{fill:#e9f8f0;stroke:#97d6b5;stroke-width:1.8;rx:10;ry:10}
+      .arrow{stroke:#6781b1;stroke-width:2.4;fill:none;marker-end:url(#a)}
+    </style>
+    <marker id="a" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#6781b1"/></marker>
+  </defs>
+  <rect class="bg" x="0" y="0" width="1200" height="620"/>
+  <text class="head" x="35" y="50">How BlockHound Works</text>
+
+  <rect class="panel" x="35" y="85" width="1130" height="500"/>
+
+  <rect class="node" x="70" y="130" width="300" height="80"/>
+  <text class="title" x="95" y="165">1) BlockHound.install()</text>
+  <text class="txt" x="95" y="188">Instrumentation is activated</text>
+
+  <rect class="node" x="450" y="130" width="300" height="80"/>
+  <text class="title" x="475" y="165">2) Blocking methods marked</text>
+  <text class="txt" x="475" y="188">sleep, socket, file I/O, etc.</text>
+
+  <rect class="node" x="830" y="130" width="300" height="80"/>
+  <text class="title" x="855" y="165">3) Runtime interception</text>
+  <text class="txt" x="855" y="188">Calls are checked on execution</text>
+
+  <path class="arrow" d="M370 170 L450 170"/><path class="arrow" d="M750 170 L830 170"/>
+
+  <rect class="node" x="120" y="290" width="420" height="95"/>
+  <text class="title" x="145" y="325">4a) Called on allowed thread</text>
+  <text class="txt" x="145" y="349">No error (e.g., boundedElastic)</text>
+
+  <rect class="err" x="660" y="290" width="420" height="95"/>
+  <text class="title" x="685" y="325">4b) Called on non-blocking thread</text>
+  <text class="txt" x="685" y="349">BlockingOperationError is thrown</text>
+
+  <path class="arrow" d="M830 210 L520 290"/><path class="arrow" d="M980 210 L870 290"/>
+
+  <rect class="ok" x="120" y="440" width="960" height="95"/>
+  <text class="title" x="145" y="475">Outcome</text>
+  <text class="txt" x="145" y="499">You discover blocking code early (especially in tests) before it causes production latency incidents.</text>
+</svg>

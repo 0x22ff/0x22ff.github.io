@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="650" viewBox="0 0 1200 650" role="img" aria-labelledby="t d">
+  <title id="t">BlockHound fix patterns</title>
+  <desc id="d">Three practical responses when BlockHound detects blocking code.</desc>
+  <defs>
+    <style>
+      .bg{fill:#f7f9fd}.panel{fill:#fff;stroke:#cfd8e6;stroke-width:2;rx:14;ry:14}
+      .head{font:700 24px 'Pretendard','Segoe UI',sans-serif;fill:#1f2a44}
+      .title{font:700 18px 'Pretendard','Segoe UI',sans-serif;fill:#24324f}
+      .txt{font:500 14px 'Pretendard','Segoe UI',sans-serif;fill:#4b5a77}
+      .card{fill:#eef4ff;stroke:#b7c9ef;stroke-width:1.8;rx:10;ry:10}
+      .warn{fill:#fff4df;stroke:#f2cc8b;stroke-width:1.6;rx:10;ry:10}
+      .arrow{stroke:#6781b1;stroke-width:2.4;fill:none;marker-end:url(#a)}
+    </style>
+    <marker id="a" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#6781b1"/></marker>
+  </defs>
+  <rect class="bg" x="0" y="0" width="1200" height="650"/>
+  <text class="head" x="35" y="50">Three Practical Fix Patterns</text>
+
+  <rect class="panel" x="35" y="85" width="1130" height="530"/>
+
+  <rect class="card" x="70" y="130" width="330" height="180"/>
+  <text class="title" x="95" y="165">1) Replace with non-blocking API</text>
+  <text class="txt" x="95" y="190">Example:</text>
+  <text class="txt" x="95" y="213">JDBC -&gt; R2DBC</text>
+  <text class="txt" x="95" y="236">RestTemplate -&gt; WebClient</text>
+  <text class="txt" x="95" y="259">Best long-term option</text>
+
+  <rect class="card" x="435" y="130" width="330" height="180"/>
+  <text class="title" x="460" y="165">2) Isolate blocking work</text>
+  <text class="txt" x="460" y="190">Mono.fromCallable(...)</text>
+  <text class="txt" x="460" y="213">.subscribeOn(boundedElastic)</text>
+  <text class="txt" x="460" y="236">Useful during migration phase</text>
+
+  <rect class="card" x="800" y="130" width="330" height="180"/>
+  <text class="title" x="825" y="165">3) Allow-list tiny legacy spot</text>
+  <text class="txt" x="825" y="190">builder.allowBlockingCallsInside(...)</text>
+  <text class="txt" x="825" y="213">Only with strict reason + docs</text>
+  <text class="txt" x="825" y="236">Prefer temporary usage</text>
+
+  <path class="arrow" d="M400 220 L435 220"/><path class="arrow" d="M765 220 L800 220"/>
+
+  <rect class="warn" x="70" y="360" width="1060" height="220"/>
+  <text class="title" x="95" y="400">Decision rule</text>
+  <text class="txt" x="95" y="430">- New code: choose non-blocking stack first.</text>
+  <text class="txt" x="95" y="455">- Existing blocking dependency: isolate to boundedElastic.</text>
+  <text class="txt" x="95" y="480">- Allow-list: use only for unavoidable legacy internals and track cleanup date.</text>
+  <text class="txt" x="95" y="515">Goal is not "make error disappear"; goal is "keep event-loop healthy".</text>
+</svg>

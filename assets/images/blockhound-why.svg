@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" role="img" aria-labelledby="t d">
+  <title id="t">Why BlockHound is needed</title>
+  <desc id="d">Single blocking call can stall event-loop processing and increase latency.</desc>
+  <defs>
+    <style>
+      .bg{fill:#f7f9fd}.panel{fill:#fff;stroke:#cfd8e6;stroke-width:2;rx:14;ry:14}
+      .head{font:700 24px 'Pretendard','Segoe UI',sans-serif;fill:#1f2a44}
+      .title{font:700 18px 'Pretendard','Segoe UI',sans-serif;fill:#24324f}
+      .txt{font:500 14px 'Pretendard','Segoe UI',sans-serif;fill:#4b5a77}
+      .ok{fill:#e9f8f0;stroke:#97d6b5;stroke-width:1.6;rx:10;ry:10}
+      .bad{fill:#fff1f1;stroke:#efb3b3;stroke-width:1.6;rx:10;ry:10}
+      .node{fill:#eef4ff;stroke:#b7c9ef;stroke-width:1.8;rx:10;ry:10}
+      .arrow{stroke:#6781b1;stroke-width:2.4;fill:none;marker-end:url(#a)}
+    </style>
+    <marker id="a" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#6781b1"/></marker>
+  </defs>
+  <rect class="bg" x="0" y="0" width="1200" height="620"/>
+  <text class="head" x="35" y="50">Problem: One Blocking Call Can Freeze the Event Loop</text>
+
+  <rect class="panel" x="35" y="85" width="1130" height="230"/>
+  <text class="title" x="60" y="120">Normal non-blocking processing</text>
+  <rect class="ok" x="70" y="145" width="230" height="60"/><text class="txt" x="90" y="181">request A processed</text>
+  <rect class="ok" x="340" y="145" width="230" height="60"/><text class="txt" x="360" y="181">request B processed</text>
+  <rect class="ok" x="610" y="145" width="230" height="60"/><text class="txt" x="630" y="181">request C processed</text>
+  <rect class="ok" x="880" y="145" width="230" height="60"/><text class="txt" x="900" y="181">responses returned</text>
+  <path class="arrow" d="M300 175 L340 175"/><path class="arrow" d="M570 175 L610 175"/><path class="arrow" d="M840 175 L880 175"/>
+  <text class="txt" x="70" y="255">Event-loop thread stays available because no blocking operation occupies it.</text>
+
+  <rect class="panel" x="35" y="340" width="1130" height="245"/>
+  <text class="title" x="60" y="375">When blocking code slips in</text>
+  <rect class="bad" x="70" y="400" width="330" height="70"/><text class="txt" x="90" y="442">request B hits Thread.sleep / JDBC call</text>
+  <rect class="bad" x="450" y="400" width="330" height="70"/><text class="txt" x="470" y="442">event-loop thread is occupied</text>
+  <rect class="bad" x="830" y="400" width="300" height="70"/><text class="txt" x="850" y="442">other requests wait in queue</text>
+  <path class="arrow" d="M400 435 L450 435"/><path class="arrow" d="M780 435 L830 435"/>
+  <text class="txt" x="70" y="525">Result: p95/p99 latency rises even when CPU usage looks normal.</text>
+</svg>

@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" role="img" aria-labelledby="t d">
+  <title id="t">BlockHound rollout plan</title>
+  <desc id="d">Safe rollout from local tests to CI and production observability.</desc>
+  <defs>
+    <style>
+      .bg{fill:#f7f9fd}.panel{fill:#fff;stroke:#cfd8e6;stroke-width:2;rx:14;ry:14}
+      .head{font:700 24px 'Pretendard','Segoe UI',sans-serif;fill:#1f2a44}
+      .title{font:700 18px 'Pretendard','Segoe UI',sans-serif;fill:#24324f}
+      .txt{font:500 14px 'Pretendard','Segoe UI',sans-serif;fill:#4b5a77}
+      .step{fill:#eef4ff;stroke:#b7c9ef;stroke-width:1.8;rx:10;ry:10}
+      .arrow{stroke:#6781b1;stroke-width:2.4;fill:none;marker-end:url(#a)}
+    </style>
+    <marker id="a" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#6781b1"/></marker>
+  </defs>
+  <rect class="bg" x="0" y="0" width="1200" height="620"/>
+  <text class="head" x="35" y="50">Recommended Rollout Strategy</text>
+
+  <rect class="panel" x="35" y="85" width="1130" height="500"/>
+
+  <rect class="step" x="70" y="170" width="240" height="120"/>
+  <text class="title" x="95" y="205">Step 1</text>
+  <text class="txt" x="95" y="230">Enable in local tests</text>
+  <text class="txt" x="95" y="253">Fix obvious blocking calls</text>
+
+  <rect class="step" x="350" y="170" width="240" height="120"/>
+  <text class="title" x="375" y="205">Step 2</text>
+  <text class="txt" x="375" y="230">Enable in CI test suite</text>
+  <text class="txt" x="375" y="253">Prevent regressions</text>
+
+  <rect class="step" x="630" y="170" width="240" height="120"/>
+  <text class="title" x="655" y="205">Step 3</text>
+  <text class="txt" x="655" y="230">Track allow-lists</text>
+  <text class="txt" x="655" y="253">Set cleanup owner/date</text>
+
+  <rect class="step" x="910" y="170" width="220" height="120"/>
+  <text class="title" x="935" y="205">Step 4</text>
+  <text class="txt" x="935" y="230">Monitor latency + errors</text>
+  <text class="txt" x="935" y="253">Verify real impact</text>
+
+  <path class="arrow" d="M310 230 L350 230"/><path class="arrow" d="M590 230 L630 230"/><path class="arrow" d="M870 230 L910 230"/>
+
+  <rect class="step" x="70" y="360" width="1060" height="170"/>
+  <text class="title" x="95" y="400">Done criteria</text>
+  <text class="txt" x="95" y="425">- New reactive code does not introduce blocking operations on event-loop threads.</text>
+  <text class="txt" x="95" y="450">- CI catches violations before merge.</text>
+  <text class="txt" x="95" y="475">- p95/p99 latency becomes more stable under concurrent load.</text>
+</svg>

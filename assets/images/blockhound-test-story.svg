@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" role="img" aria-labelledby="t d">
+  <title id="t">BlockHound test story</title>
+  <desc id="d">Demonstrates test failure when Thread.sleep is used in reactive pipeline.</desc>
+  <defs>
+    <style>
+      .bg{fill:#f7f9fd}.panel{fill:#fff;stroke:#cfd8e6;stroke-width:2;rx:14;ry:14}
+      .head{font:700 24px 'Pretendard','Segoe UI',sans-serif;fill:#1f2a44}
+      .title{font:700 18px 'Pretendard','Segoe UI',sans-serif;fill:#24324f}
+      .txt{font:500 14px 'Pretendard','Segoe UI',sans-serif;fill:#4b5a77}
+      .code{fill:#0f172a;stroke:#1f2a44;stroke-width:1.6;rx:10;ry:10}
+      .codeTxt{font:500 13px 'JetBrains Mono',monospace;fill:#e2e8f0}
+      .err{fill:#fff1f1;stroke:#efb3b3;stroke-width:1.8;rx:10;ry:10}
+      .ok{fill:#e9f8f0;stroke:#97d6b5;stroke-width:1.8;rx:10;ry:10}
+      .arrow{stroke:#6781b1;stroke-width:2.4;fill:none;marker-end:url(#a)}
+    </style>
+    <marker id="a" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#6781b1"/></marker>
+  </defs>
+  <rect class="bg" x="0" y="0" width="1200" height="620"/>
+  <text class="head" x="35" y="50">Typical Test Story with BlockHound</text>
+
+  <rect class="panel" x="35" y="85" width="1130" height="500"/>
+
+  <rect class="code" x="70" y="130" width="510" height="210"/>
+  <text class="codeTxt" x="95" y="170">Mono.fromRunnable(() -&gt; {</text>
+  <text class="codeTxt" x="95" y="195">  Thread.sleep(50);</text>
+  <text class="codeTxt" x="95" y="220">}).thenReturn("ok");</text>
+  <text class="codeTxt" x="95" y="265">StepVerifier.create(service.call())</text>
+  <text class="codeTxt" x="95" y="290">  .expectNext("ok")</text>
+  <text class="codeTxt" x="95" y="315">  .verifyComplete();</text>
+
+  <rect class="err" x="650" y="170" width="450" height="120"/>
+  <text class="title" x="675" y="210">Test fails</text>
+  <text class="txt" x="675" y="235">BlockingOperationError: blocking call on</text>
+  <text class="txt" x="675" y="258">reactor-http-nio thread</text>
+
+  <path class="arrow" d="M580 235 L650 235"/>
+
+  <rect class="ok" x="70" y="400" width="1030" height="140"/>
+  <text class="title" x="95" y="440">What this gives you</text>
+  <text class="txt" x="95" y="465">You catch hidden blocking code during CI, not after a latency incident in production.</text>
+  <text class="txt" x="95" y="490">Teams can enforce a clear rule: reactive path must not call blocking methods.</text>
+</svg>
