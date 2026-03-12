@@ -13,7 +13,11 @@ title: 글
   {% for post in site.posts %}
   <article class="v-card">
     <a class="v-card-link" href="{{ post.url | relative_url }}">
-      <div class="v-thumb" aria-hidden="true"></div>
+      {% if post.thumbnail %}
+      <img class="v-thumb" src="{{ post.thumbnail | relative_url }}" alt="{{ post.title | escape }} thumbnail" loading="lazy">
+      {% else %}
+      <div class="v-thumb v-thumb-placeholder" aria-hidden="true"></div>
+      {% endif %}
       <div class="v-body">
         <h2>{{ post.title | escape }}</h2>
         <p class="v-excerpt">{{ post.excerpt | strip_html | truncate: 140 }}</p>

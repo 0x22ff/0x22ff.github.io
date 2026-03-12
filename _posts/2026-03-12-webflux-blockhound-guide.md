@@ -4,6 +4,7 @@ title: "WebFlux에서 BlockHound로 블로킹 잡기: 실무 적용 가이드"
 date: 2026-03-12 11:30:00 +0900
 categories: [backend]
 tags: [spring, webflux, blockhound, reactor, async]
+thumbnail: /assets/images/thumb-webflux-blockhound.svg
 ---
 
 WebFlux를 쓰는데도 응답이 갑자기 느려지는 순간이 있습니다.  

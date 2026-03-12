@@ -168,6 +168,13 @@ a:visited {
 
 .v-thumb {
   height: 170px;
+  width: 100%;
+  display: block;
+  object-fit: cover;
+  background: #edf3ff;
+}
+
+.v-thumb-placeholder {
   background:
     radial-gradient(circle at 15% 22%, rgba(47, 109, 246, 0.22), transparent 35%),
     radial-gradient(circle at 84% 18%, rgba(14, 165, 233, 0.17), transparent 32%),

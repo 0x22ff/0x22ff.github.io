@@ -4,6 +4,7 @@ title: "BSSJ 아키텍처, 왜 지금 이 구조가 맞았는지"
 date: 2026-03-10 09:10:00 +0900
 categories: [architecture]
 tags: [spring-boot, vue, mysql, aws, nginx, monorepo]
+thumbnail: /assets/images/thumb-bssj-architecture.svg
 ---
 
 서버 한 대로 서비스는 띄워야 하고, 운영 복잡도는 낮춰야 하고, 화면 경험은 분리해야 할 때가 있죠.  

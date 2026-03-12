@@ -4,6 +4,7 @@ title: "Spring WebFlux 비동기, 한 번에 이해하는 실전 가이드"
 date: 2026-03-12 10:00:00 +0900
 categories: [backend]
 tags: [spring, webflux, reactor, async, java]
+thumbnail: /assets/images/thumb-webflux-async.svg
 ---
 
 요청이 많아질수록 서버가 버거워지는 이유는 보통 비슷합니다.  

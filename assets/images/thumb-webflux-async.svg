@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="t d">
+  <title id="t">Spring WebFlux Async Guide</title>
+  <desc id="d">Thumbnail for Spring WebFlux async article</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#eef6ff"/>
+      <stop offset="100%" stop-color="#f9fbff"/>
+    </linearGradient>
+    <style>
+      .t1{font:700 56px 'Pretendard','Segoe UI',sans-serif;fill:#1f2a44}
+      .t2{font:600 24px 'Pretendard','Segoe UI',sans-serif;fill:#4b5a77}
+      .mono{font:700 24px 'JetBrains Mono',monospace;fill:#2f5cc4}
+      .node{fill:#ffffff;stroke:#cfd8e6;stroke-width:2;rx:14;ry:14}
+      .line{stroke:#7da0df;stroke-width:3;fill:none;marker-end:url(#a)}
+    </style>
+    <marker id="a" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0,10 3.5,0 7" fill="#7da0df"/>
+    </marker>
+  </defs>
+  <rect fill="url(#bg)" x="0" y="0" width="1200" height="630"/>
+  <rect class="node" x="90" y="80" width="1020" height="470"/>
+
+  <text class="t1" x="145" y="225">Spring WebFlux Async</text>
+  <text class="t2" x="145" y="275">From Mono/Flux to real-world non-blocking flow</text>
+
+  <rect class="node" x="145" y="340" width="220" height="72"/>
+  <text class="mono" x="182" y="386">Request</text>
+  <rect class="node" x="455" y="340" width="220" height="72"/>
+  <text class="mono" x="505" y="386">Mono/Flux</text>
+  <rect class="node" x="765" y="340" width="220" height="72"/>
+  <text class="mono" x="820" y="386">Response</text>
+
+  <path class="line" d="M365 376 L455 376"/>
+  <path class="line" d="M675 376 L765 376"/>
+</svg>
