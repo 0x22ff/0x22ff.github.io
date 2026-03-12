@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" role="img" aria-labelledby="t d">
+  <title id="t">WebClient fan-out pattern</title>
+  <desc id="d">Single incoming request triggers parallel calls to profile, orders, and points services and merges responses.</desc>
+  <defs>
+    <style>
+      .bg { fill: #f7f9fd; }
+      .panel { fill: #ffffff; stroke: #cfd8e6; stroke-width: 2; rx: 14; ry: 14; }
+      .head { font: 700 24px 'Pretendard','Segoe UI',sans-serif; fill: #1f2a44; }
+      .title { font: 700 18px 'Pretendard','Segoe UI',sans-serif; fill: #24324f; }
+      .txt { font: 500 14px 'Pretendard','Segoe UI',sans-serif; fill: #4b5a77; }
+      .node { fill: #eef4ff; stroke: #b7c9ef; stroke-width: 1.8; rx: 10; ry: 10; }
+      .node2 { fill: #f6f9ff; stroke: #c8d5ed; stroke-width: 1.8; rx: 10; ry: 10; }
+      .arrow { stroke: #6781b1; stroke-width: 2.4; fill: none; marker-end: url(#a); }
+    </style>
+    <marker id="a" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#6781b1"/>
+    </marker>
+  </defs>
+  <rect class="bg" x="0" y="0" width="1200" height="620"/>
+  <text class="head" x="35" y="50">WebClient Parallel Fan-out with Mono.zip</text>
+
+  <rect class="panel" x="35" y="85" width="1130" height="500"/>
+
+  <rect class="node" x="80" y="270" width="220" height="80"/>
+  <text class="title" x="105" y="307">Incoming Request</text>
+  <text class="txt" x="105" y="331">GET /api/dashboard</text>
+
+  <rect class="node2" x="390" y="255" width="260" height="110"/>
+  <text class="title" x="415" y="292">WebFlux Service</text>
+  <text class="txt" x="415" y="316">Build 3 Mono calls</text>
+  <text class="txt" x="415" y="338">Merge via Mono.zip()</text>
+
+  <rect class="node" x="760" y="130" width="300" height="80"/>
+  <text class="title" x="785" y="165">Profile Service</text>
+  <text class="txt" x="785" y="189">Mono&lt;Profile&gt;</text>
+
+  <rect class="node" x="760" y="270" width="300" height="80"/>
+  <text class="title" x="785" y="305">Order Service</text>
+  <text class="txt" x="785" y="329">Mono&lt;List&lt;Order&gt;&gt;</text>
+
+  <rect class="node" x="760" y="410" width="300" height="80"/>
+  <text class="title" x="785" y="445">Point Service</text>
+  <text class="txt" x="785" y="469">Mono&lt;PointSummary&gt;</text>
+
+  <rect class="node2" x="390" y="450" width="260" height="90"/>
+  <text class="title" x="415" y="485">Combined Response</text>
+  <text class="txt" x="415" y="509">Dashboard DTO</text>
+
+  <path class="arrow" d="M300 310 L390 310"/>
+  <path class="arrow" d="M650 290 L760 170"/>
+  <path class="arrow" d="M650 310 L760 310"/>
+  <path class="arrow" d="M650 330 L760 450"/>
+  <path class="arrow" d="M910 210 L650 470"/>
+  <path class="arrow" d="M910 350 L650 480"/>
+  <path class="arrow" d="M910 490 L650 500"/>
+</svg>

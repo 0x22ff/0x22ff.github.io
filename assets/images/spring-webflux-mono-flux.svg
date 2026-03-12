@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="470" viewBox="0 0 1200 470" role="img" aria-labelledby="t d">
+  <title id="t">Mono vs Flux</title>
+  <desc id="d">Shows Reactor types Mono and Flux over time.</desc>
+  <defs>
+    <style>
+      .bg { fill: #f7f9fd; }
+      .panel { fill: #ffffff; stroke: #cfd8e6; stroke-width: 2; rx: 14; ry: 14; }
+      .head { font: 700 25px 'Pretendard','Segoe UI',sans-serif; fill: #1f2a44; }
+      .title { font: 700 20px 'Pretendard','Segoe UI',sans-serif; fill: #24324f; }
+      .txt { font: 500 14px 'Pretendard','Segoe UI',sans-serif; fill: #4b5a77; }
+      .line { stroke: #9db0d1; stroke-width: 2; }
+      .dot { fill: #2f6df6; }
+      .done { fill: #10b981; }
+      .err { fill: #ef4444; }
+    </style>
+  </defs>
+  <rect class="bg" x="0" y="0" width="1200" height="470"/>
+  <text class="head" x="35" y="55">Reactor Types: Mono and Flux</text>
+
+  <rect class="panel" x="35" y="90" width="1130" height="160"/>
+  <text class="title" x="60" y="128">Mono&lt;T&gt; : 0 or 1 item</text>
+  <text class="txt" x="60" y="152">Typical use: single response, optional result, async completion</text>
+  <line class="line" x1="60" y1="195" x2="1110" y2="195"/>
+  <circle class="dot" cx="400" cy="195" r="8"/>
+  <circle class="done" cx="540" cy="195" r="8"/>
+  <text class="txt" x="385" y="220">onNext</text>
+  <text class="txt" x="525" y="220">onComplete</text>
+
+  <rect class="panel" x="35" y="275" width="1130" height="160"/>
+  <text class="title" x="60" y="313">Flux&lt;T&gt; : 0..N items</text>
+  <text class="txt" x="60" y="337">Typical use: list stream, SSE, continuous updates</text>
+  <line class="line" x1="60" y1="380" x2="1110" y2="380"/>
+  <circle class="dot" cx="260" cy="380" r="8"/>
+  <circle class="dot" cx="390" cy="380" r="8"/>
+  <circle class="dot" cx="520" cy="380" r="8"/>
+  <circle class="dot" cx="650" cy="380" r="8"/>
+  <circle class="done" cx="790" cy="380" r="8"/>
+  <text class="txt" x="230" y="405">item1</text>
+  <text class="txt" x="360" y="405">item2</text>
+  <text class="txt" x="490" y="405">item3</text>
+  <text class="txt" x="620" y="405">itemN</text>
+  <text class="txt" x="760" y="405">complete</text>
+</svg>

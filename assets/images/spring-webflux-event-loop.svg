@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" role="img" aria-labelledby="t d">
+  <title id="t">Event loop and blocking pitfall</title>
+  <desc id="d">Explains event loop processing and why blocking calls are dangerous in WebFlux.</desc>
+  <defs>
+    <style>
+      .bg { fill: #f7f9fd; }
+      .panel { fill: #ffffff; stroke: #cfd8e6; stroke-width: 2; rx: 14; ry: 14; }
+      .head { font: 700 24px 'Pretendard','Segoe UI',sans-serif; fill: #1f2a44; }
+      .title { font: 700 19px 'Pretendard','Segoe UI',sans-serif; fill: #24324f; }
+      .txt { font: 500 14px 'Pretendard','Segoe UI',sans-serif; fill: #4b5a77; }
+      .ok { fill: #e8faf2; stroke: #9adbbd; stroke-width: 1.8; rx: 10; ry: 10; }
+      .bad { fill: #fff1f1; stroke: #f2bbbb; stroke-width: 1.8; rx: 10; ry: 10; }
+      .arrow { stroke: #6781b1; stroke-width: 2.4; fill: none; marker-end: url(#a); }
+    </style>
+    <marker id="a" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#6781b1"/>
+    </marker>
+  </defs>
+  <rect class="bg" x="0" y="0" width="1200" height="620"/>
+  <text class="head" x="35" y="50">WebFlux Thread Model: Keep Event Loop Free</text>
+
+  <rect class="panel" x="35" y="85" width="1130" height="240"/>
+  <text class="title" x="60" y="125">Normal Non-Blocking Path</text>
+  <rect class="ok" x="65" y="150" width="230" height="65"/>
+  <text class="txt" x="85" y="188">Request enters Event Loop</text>
+  <rect class="ok" x="345" y="150" width="230" height="65"/>
+  <text class="txt" x="365" y="188">Non-blocking I/O call</text>
+  <rect class="ok" x="625" y="150" width="230" height="65"/>
+  <text class="txt" x="645" y="188">Callback when ready</text>
+  <rect class="ok" x="905" y="150" width="230" height="65"/>
+  <text class="txt" x="925" y="188">Response written</text>
+
+  <path class="arrow" d="M295 182 L345 182"/>
+  <path class="arrow" d="M575 182 L625 182"/>
+  <path class="arrow" d="M855 182 L905 182"/>
+
+  <text class="txt" x="65" y="260">Event loop thread does not wait on I/O; it handles other requests in the meantime.</text>
+
+  <rect class="panel" x="35" y="355" width="1130" height="230"/>
+  <text class="title" x="60" y="395">Blocking Pitfall</text>
+  <rect class="bad" x="65" y="420" width="320" height="70"/>
+  <text class="txt" x="85" y="460">Event loop thread calls blocking code</text>
+  <rect class="bad" x="445" y="420" width="320" height="70"/>
+  <text class="txt" x="465" y="460">Thread is occupied (cannot process others)</text>
+  <rect class="bad" x="825" y="420" width="320" height="70"/>
+  <text class="txt" x="845" y="460">Latency spikes / throughput drop</text>
+
+  <path class="arrow" d="M385 455 L445 455"/>
+  <path class="arrow" d="M765 455 L825 455"/>
+</svg>

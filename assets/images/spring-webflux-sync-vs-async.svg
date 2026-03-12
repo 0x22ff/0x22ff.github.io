@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="650" viewBox="0 0 1200 650" role="img" aria-labelledby="t d">
+  <title id="t">Spring MVC vs WebFlux request flow</title>
+  <desc id="d">Compares blocking thread-per-request model and non-blocking event-loop model.</desc>
+  <defs>
+    <style>
+      .bg { fill: #f7f9fd; }
+      .panel { fill: #ffffff; stroke: #cfd8e6; stroke-width: 2; rx: 14; ry: 14; }
+      .head { font: 700 26px 'Pretendard','Segoe UI',sans-serif; fill: #1f2a44; }
+      .title { font: 700 20px 'Pretendard','Segoe UI',sans-serif; fill: #24324f; }
+      .txt { font: 500 14px 'Pretendard','Segoe UI',sans-serif; fill: #4b5a77; }
+      .box { fill: #f8fbff; stroke: #c8d5ed; stroke-width: 1.8; rx: 10; ry: 10; }
+      .box2 { fill: #eef4ff; stroke: #b7c9ef; stroke-width: 1.8; rx: 10; ry: 10; }
+      .arrow { stroke: #6781b1; stroke-width: 2.4; fill: none; marker-end: url(#a); }
+      .warn { fill: #fff4df; stroke: #f2cc8b; stroke-width: 1.6; rx: 10; ry: 10; }
+    </style>
+    <marker id="a" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#6781b1"/>
+    </marker>
+  </defs>
+  <rect class="bg" x="0" y="0" width="1200" height="650"/>
+  <text class="head" x="35" y="50">Request Handling: MVC (Blocking) vs WebFlux (Non-Blocking)</text>
+
+  <rect class="panel" x="35" y="90" width="550" height="520"/>
+  <text class="title" x="60" y="130">Spring MVC</text>
+  <text class="txt" x="60" y="155">Thread-per-request, blocking I/O</text>
+
+  <rect class="box" x="70" y="185" width="180" height="60"/>
+  <text class="txt" x="90" y="221">Client Request A</text>
+  <rect class="box" x="70" y="270" width="180" height="60"/>
+  <text class="txt" x="90" y="306">Client Request B</text>
+  <rect class="box" x="70" y="355" width="180" height="60"/>
+  <text class="txt" x="90" y="391">Client Request C</text>
+
+  <rect class="box2" x="310" y="185" width="220" height="60"/>
+  <text class="txt" x="330" y="221">Worker Thread #1</text>
+  <rect class="box2" x="310" y="270" width="220" height="60"/>
+  <text class="txt" x="330" y="306">Worker Thread #2</text>
+  <rect class="box2" x="310" y="355" width="220" height="60"/>
+  <text class="txt" x="330" y="391">Worker Thread #3</text>
+
+  <rect class="warn" x="70" y="455" width="460" height="120"/>
+  <text class="txt" x="90" y="490">If DB/API call blocks, thread waits.</text>
+  <text class="txt" x="90" y="515">More concurrent requests -> more threads needed.</text>
+  <text class="txt" x="90" y="540">Context switch and memory overhead can increase.</text>
+
+  <path class="arrow" d="M250 215 L310 215"/>
+  <path class="arrow" d="M250 300 L310 300"/>
+  <path class="arrow" d="M250 385 L310 385"/>
+
+  <rect class="panel" x="615" y="90" width="550" height="520"/>
+  <text class="title" x="640" y="130">Spring WebFlux</text>
+  <text class="txt" x="640" y="155">Event-loop + reactive pipeline</text>
+
+  <rect class="box" x="650" y="185" width="180" height="60"/>
+  <text class="txt" x="670" y="221">Request A</text>
+  <rect class="box" x="650" y="270" width="180" height="60"/>
+  <text class="txt" x="670" y="306">Request B</text>
+  <rect class="box" x="650" y="355" width="180" height="60"/>
+  <text class="txt" x="670" y="391">Request C</text>
+
+  <rect class="box2" x="890" y="220" width="240" height="160"/>
+  <text class="txt" x="910" y="255">Event Loop Threads</text>
+  <text class="txt" x="910" y="280">Process callbacks</text>
+  <text class="txt" x="910" y="305">instead of waiting</text>
+  <text class="txt" x="910" y="330">for I/O completion</text>
+
+  <rect class="warn" x="650" y="455" width="480" height="120"/>
+  <text class="txt" x="670" y="490">Non-blocking calls keep threads available.</text>
+  <text class="txt" x="670" y="515">Good for many concurrent I/O-bound requests.</text>
+  <text class="txt" x="670" y="540">But blocking code must be isolated carefully.</text>
+
+  <path class="arrow" d="M830 215 L890 250"/>
+  <path class="arrow" d="M830 300 L890 300"/>
+  <path class="arrow" d="M830 385 L890 350"/>
+</svg>
