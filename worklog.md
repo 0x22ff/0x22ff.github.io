@@ -13,7 +13,7 @@ permalink: /worklog/
   <header class="wl-header">
     <h1>작업일지 Timeline</h1>
     <p>프로젝트별로 묶어서 흐름을 볼 수 있게 정리한 작업일지입니다. BSSJ 개발 기록과 블로그 운영 기록을 탭으로 구분했습니다.</p>
-    <div class="wl-stats"><span>총 항목 42개</span><span>BSSJ 37개</span><span>기타 5개</span><span>기간 2024-12-25 ~ 2026-03-12</span></div>
+    <div class="wl-stats"><span>총 항목 43개</span><span>BSSJ 38개</span><span>기타 5개</span><span>기간 2024-12-25 ~ 2026-03-12</span></div>
   </header>
 
   <section class="wl-project">
@@ -68,6 +68,15 @@ permalink: /worklog/
         <span class="wl-project-chip">GitHub Blog</span>
         <h3>GitHub Blog · GitHub Pages 초기 세팅</h3>
         <p>블로그 저장소를 정비하고 Pages 배포 경로를 점검했다. 포스트 날짜/경로 이슈를 조정해 실제 공개 URL에서 글이 노출되도록 안정화했다.</p>
+      </article>
+    </li>
+    <li class="wl-item" data-project="bssj">
+      <div class="wl-dot" aria-hidden="true"></div>
+      <article class="wl-card">
+        <p class="wl-date">2026-03-12</p>
+        <span class="wl-project-chip">BSSJ</span>
+        <h3>Task 0056 · 교회소개 페이지 CMS 연동</h3>
+        <p>하드코딩된 교회소개 페이지를 CMS 관리형으로 전환하는 작업을 시작했다. 담임목사 인삿말/교회 소개/교회 연혁을 CMS 편집 + API 연동으로 묶어, 운영자가 코드 수정 없이 콘텐츠를 갱신할 수 있게 만드는 것이 핵심 목표다.</p>
       </article>
     </li>
     <li class="wl-item" data-project="bssj">
