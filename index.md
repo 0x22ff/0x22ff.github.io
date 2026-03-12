@@ -3,14 +3,6 @@ layout: default
 title: 글
 ---
 
-<section class="v-profile">
-  <div class="v-avatar">0x</div>
-  <div>
-    <h1>0x22ff</h1>
-    <p>백엔드 개발, 배포 자동화, 운영 트러블슈팅 기록</p>
-  </div>
-</section>
-
 <section class="v-tabs" aria-label="navigation tabs">
   <a class="active" href="/">글</a>
   <a href="/worklog/">작업일지</a>
