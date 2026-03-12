@@ -8,7 +8,6 @@ permalink: /worklog/
   <section class="v-tabs" aria-label="navigation tabs">
     <a href="/">글</a>
     <a class="active" href="/worklog/">작업일지</a>
-    <a href="/about/">소개</a>
   </section>
 
   <header class="wl-header">

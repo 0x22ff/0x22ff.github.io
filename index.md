@@ -14,7 +14,6 @@ title: Home
 <section class="v-tabs" aria-label="navigation tabs">
   <a class="active" href="/">글</a>
   <a href="/worklog/">작업일지</a>
-  <a href="/about/">소개</a>
 </section>
 
 {% if site.posts.size > 0 %}
