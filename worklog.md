@@ -13,7 +13,7 @@ permalink: /worklog/
   <header class="wl-header">
     <h1>작업일지 Timeline</h1>
     <p>프로젝트별로 묶어서 흐름을 볼 수 있게 정리한 작업일지입니다. BSSJ 개발 기록과 블로그 운영 기록을 탭으로 구분했습니다.</p>
-    <div class="wl-stats"><span>총 항목 46개</span><span>BSSJ 38개</span><span>기타 8개</span><span>기간 2024-12-25 ~ 2026-03-14</span></div>
+    <div class="wl-stats"><span>총 항목 47개</span><span>BSSJ 38개</span><span>기타 9개</span><span>기간 2024-12-25 ~ 2026-03-14</span></div>
   </header>
 
   <section class="wl-project">
@@ -25,6 +25,15 @@ permalink: /worklog/
   </section>
 
   <ol class="wl-timeline">
+    <li class="wl-item" data-project="misc">
+      <div class="wl-dot" aria-hidden="true"></div>
+      <article class="wl-card">
+        <p class="wl-date">2026-03-14</p>
+        <span class="wl-project-chip">GitHub Blog</span>
+        <h3>GitHub Blog · 기존 기술 글 문체 통일 리라이팅</h3>
+        <p>BSSJ 아키텍처, WebFlux 비동기, BlockHound 가이드를 같은 톤으로 다시 다듬었다. 기술 내용과 코드 예시는 유지하고, 기계적인 설명체를 줄여 실제 운영자가 읽는 흐름으로 문장을 통일했다.</p>
+      </article>
+    </li>
     <li class="wl-item" data-project="misc">
       <div class="wl-dot" aria-hidden="true"></div>
       <article class="wl-card">
