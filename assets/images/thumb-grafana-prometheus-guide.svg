@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="t d">
+  <title id="t">Grafana Prometheus Monitoring Guide</title>
+  <desc id="d">Thumbnail for Spring Java21 Grafana Prometheus guide</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#edf5ff"/>
+      <stop offset="100%" stop-color="#f8fbff"/>
+    </linearGradient>
+    <style>
+      .title{font:700 52px 'Pretendard','Segoe UI',sans-serif;fill:#1f2a44}
+      .sub{font:600 24px 'Pretendard','Segoe UI',sans-serif;fill:#4f5f81}
+      .box{fill:#fff;stroke:#cfd9ea;stroke-width:2;rx:16;ry:16}
+      .mono{font:700 22px 'JetBrains Mono',monospace;fill:#3658a7}
+      .line{stroke:#7ea0dc;stroke-width:3;fill:none;marker-end:url(#arr)}
+    </style>
+    <marker id="arr" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0,10 3.5,0 7" fill="#7ea0dc"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="1200" height="630" fill="url(#bg)"/>
+  <rect x="72" y="74" width="1056" height="482" class="box"/>
+
+  <text x="132" y="212" class="title">Grafana + Prometheus</text>
+  <text x="132" y="256" class="sub">Spring Boot(Java 21) monitoring guide</text>
+
+  <rect x="132" y="338" width="220" height="72" class="box"/>
+  <text x="172" y="383" class="mono">Metrics</text>
+
+  <rect x="460" y="338" width="220" height="72" class="box"/>
+  <text x="483" y="383" class="mono">Prometheus</text>
+
+  <rect x="788" y="338" width="220" height="72" class="box"/>
+  <text x="856" y="383" class="mono">Grafana</text>
+
+  <path d="M352 374 L460 374" class="line"/>
+  <path d="M680 374 L788 374" class="line"/>
+</svg>

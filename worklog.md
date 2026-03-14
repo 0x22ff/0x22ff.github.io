@@ -30,8 +30,8 @@ permalink: /worklog/
       <article class="wl-card">
         <p class="wl-date">2026-03-14</p>
         <span class="wl-project-chip">GitHub Blog</span>
-        <h3>GitHub Blog · Grafana + Prometheus + MCP 운영 가이드 포스팅</h3>
-        <p>Spring Boot(Java 21) 기준으로 메트릭 수집, Grafana 대시보드 구성, 알람 Webhook, MCP 기반 자동 조사 리포트 흐름까지 한 번에 정리한 장문 가이드를 작성했다. 썸네일과 다이어그램, 대시보드 목업 이미지를 함께 제작해 끝까지 읽기 쉬운 구조로 보강했다.</p>
+        <h3>GitHub Blog · Grafana + Prometheus 운영 모니터링 가이드 포스팅</h3>
+        <p>Spring Boot(Java 21) 기준으로 메트릭 수집, `/actuator` 내부망 보안 설정, Prometheus scrape, Grafana 대시보드/알람 설계까지 운영 관점으로 다시 정리했다. 내용은 예시 범위를 분명히 나누고, 다이어그램과 체크리스트를 보강해 실무에서 바로 참고할 수 있게 다듬었다.</p>
       </article>
     </li>
     <li class="wl-item" data-project="misc">
