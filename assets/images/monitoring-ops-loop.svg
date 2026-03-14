@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="660" viewBox="0 0 1200 660" role="img" aria-labelledby="t d">
+  <title id="t">Observability Operations Loop</title>
+  <desc id="d">Continuous improvement loop with metrics, alerting, investigation, and tuning</desc>
+  <defs>
+    <style>
+      .bg{fill:#f7fbff}
+      .ring{fill:none;stroke:#d5e0f2;stroke-width:28}
+      .arc1{fill:none;stroke:#7ea0da;stroke-width:24;stroke-linecap:round}
+      .arc2{fill:none;stroke:#4ea37a;stroke-width:24;stroke-linecap:round}
+      .arc3{fill:none;stroke:#e58b63;stroke-width:24;stroke-linecap:round}
+      .arc4{fill:none;stroke:#7d7be2;stroke-width:24;stroke-linecap:round}
+      .h{font:700 25px 'Pretendard','Segoe UI',sans-serif;fill:#23304d}
+      .t{font:600 18px 'Pretendard','Segoe UI',sans-serif;fill:#2f3e5d}
+    </style>
+  </defs>
+  <rect class="bg" x="0" y="0" width="1200" height="660"/>
+  <text x="70" y="74" class="h">Operational Feedback Loop</text>
+
+  <circle cx="600" cy="360" r="180" class="ring"/>
+  <path d="M600 180 A180 180 0 0 1 780 360" class="arc1"/>
+  <path d="M780 360 A180 180 0 0 1 600 540" class="arc2"/>
+  <path d="M600 540 A180 180 0 0 1 420 360" class="arc3"/>
+  <path d="M420 360 A180 180 0 0 1 600 180" class="arc4"/>
+
+  <text x="545" y="214" class="t">Measure</text>
+  <text x="800" y="366" class="t">Alert</text>
+  <text x="552" y="586" class="t">Improve</text>
+  <text x="320" y="366" class="t">Analyze</text>
+
+  <rect x="510" y="316" width="180" height="90" rx="14" ry="14" fill="#fff" stroke="#cfd9ec" stroke-width="2"/>
+  <text x="556" y="366" class="t">SLO Loop</text>
+</svg>

@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="680" viewBox="0 0 1200 680" role="img" aria-labelledby="t d">
+  <title id="t">MCP Investigation Loop</title>
+  <desc id="d">How MCP analyzer receives an alert and creates an investigation report</desc>
+  <defs>
+    <style>
+      .bg{fill:#f8fbff}
+      .box{fill:#fff;stroke:#ccdaed;stroke-width:2;rx:14;ry:14}
+      .h{font:700 25px 'Pretendard','Segoe UI',sans-serif;fill:#23304d}
+      .t{font:500 20px 'Pretendard','Segoe UI',sans-serif;fill:#2f3e5d}
+      .m{font:700 17px 'JetBrains Mono',monospace;fill:#3658a7}
+      .line{stroke:#7f9fda;stroke-width:3;fill:none;marker-end:url(#arr)}
+    </style>
+    <marker id="arr" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0,10 3.5,0 7" fill="#7f9fda"/>
+    </marker>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="1200" height="680"/>
+  <text x="70" y="74" class="h">MCP-based Incident Investigation Loop</text>
+
+  <rect class="box" x="80" y="150" width="230" height="116"/>
+  <text x="145" y="200" class="m">1. Alert Event</text>
+  <text x="112" y="230" class="t">severity + labels + panel URL</text>
+
+  <rect class="box" x="360" y="150" width="230" height="116"/>
+  <text x="404" y="200" class="m">2. Context Fetch</text>
+  <text x="389" y="230" class="t">metrics/logs/deploy info</text>
+
+  <rect class="box" x="640" y="150" width="230" height="116"/>
+  <text x="684" y="200" class="m">3. MCP Reasoning</text>
+  <text x="678" y="230" class="t">pattern + anomaly hints</text>
+
+  <rect class="box" x="920" y="150" width="200" height="116"/>
+  <text x="960" y="200" class="m">4. Report</text>
+  <text x="944" y="230" class="t">summary + next steps</text>
+
+  <path class="line" d="M310 208 L360 208"/>
+  <path class="line" d="M590 208 L640 208"/>
+  <path class="line" d="M870 208 L920 208"/>
+
+  <rect class="box" x="80" y="360" width="1040" height="238"/>
+  <text x="110" y="418" class="m">Report template fields</text>
+  <text x="110" y="454" class="t">- what happened: latency p95 breached from 120ms to 900ms</text>
+  <text x="110" y="486" class="t">- likely causes: DB pool saturation after deployment</text>
+  <text x="110" y="518" class="t">- evidence: panel A/B + pod restart count + query timeout spikes</text>
+  <text x="110" y="550" class="t">- action checklist: rollback? scale DB? apply connection cap?</text>
+</svg>

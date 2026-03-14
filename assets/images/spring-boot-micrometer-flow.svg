@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="640" viewBox="0 0 1200 640" role="img" aria-labelledby="t d">
+  <title id="t">Micrometer Metrics Flow</title>
+  <desc id="d">How Spring Boot and Micrometer expose metrics for Prometheus</desc>
+  <defs>
+    <style>
+      .bg{fill:#fbfdff}
+      .box{fill:#fff;stroke:#cdd8ec;stroke-width:2;rx:14;ry:14}
+      .h{font:700 25px 'Pretendard','Segoe UI',sans-serif;fill:#23304d}
+      .t{font:500 20px 'Pretendard','Segoe UI',sans-serif;fill:#2f3e5d}
+      .mono{font:600 18px 'JetBrains Mono',monospace;fill:#3556a2}
+      .line{stroke:#87a5dc;stroke-width:3;fill:none;marker-end:url(#arrow)}
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0,10 3.5,0 7" fill="#87a5dc"/>
+    </marker>
+  </defs>
+  <rect class="bg" x="0" y="0" width="1200" height="640"/>
+  <text x="70" y="74" class="h">Spring Boot Metrics Publication Flow</text>
+
+  <rect class="box" x="70" y="140" width="290" height="130"/>
+  <text x="110" y="190" class="mono">HTTP / DB / JVM</text>
+  <text x="100" y="220" class="t">runtime events happen</text>
+
+  <rect class="box" x="455" y="140" width="290" height="130"/>
+  <text x="505" y="190" class="mono">Micrometer Registry</text>
+  <text x="490" y="220" class="t">tag + aggregate counters</text>
+
+  <rect class="box" x="840" y="140" width="290" height="130"/>
+  <text x="886" y="190" class="mono">Actuator Endpoint</text>
+  <text x="900" y="220" class="t">/actuator/prometheus</text>
+
+  <path class="line" d="M360 205 L455 205"/>
+  <path class="line" d="M745 205 L840 205"/>
+
+  <rect class="box" x="70" y="350" width="1060" height="200"/>
+  <text x="108" y="406" class="mono">Tip: keep tags bounded</text>
+  <text x="108" y="438" class="t">Avoid high-cardinality tags (userId, raw URL, requestId) to protect TSDB memory.</text>
+  <text x="108" y="474" class="mono">Recommended starters</text>
+  <text x="108" y="506" class="t">http.server.requests, jvm.memory.used, process.cpu.usage, db query latency percentiles</text>
+</svg>

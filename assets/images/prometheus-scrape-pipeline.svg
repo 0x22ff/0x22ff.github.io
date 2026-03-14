@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="660" viewBox="0 0 1200 660" role="img" aria-labelledby="t d">
+  <title id="t">Prometheus Scrape Pipeline</title>
+  <desc id="d">Scrape, store, and query flow in Prometheus</desc>
+  <defs>
+    <style>
+      .bg{fill:#f7faff}
+      .box{fill:#ffffff;stroke:#cfdaee;stroke-width:2;rx:14;ry:14}
+      .h{font:700 26px 'Pretendard','Segoe UI',sans-serif;fill:#22314f}
+      .t{font:500 20px 'Pretendard','Segoe UI',sans-serif;fill:#2e3d5c}
+      .m{font:700 18px 'JetBrains Mono',monospace;fill:#3858a5}
+      .line{stroke:#7f9fda;stroke-width:3;fill:none;marker-end:url(#a)}
+    </style>
+    <marker id="a" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0,10 3.5,0 7" fill="#7f9fda"/>
+    </marker>
+  </defs>
+  <rect class="bg" x="0" y="0" width="1200" height="660"/>
+  <text x="70" y="74" class="h">Prometheus Data Pipeline</text>
+
+  <rect class="box" x="70" y="150" width="230" height="120"/>
+  <text x="107" y="198" class="m">Target Service A</text>
+  <text x="112" y="228" class="t">/actuator/prometheus</text>
+
+  <rect class="box" x="70" y="300" width="230" height="120"/>
+  <text x="107" y="348" class="m">Target Service B</text>
+  <text x="112" y="378" class="t">/actuator/prometheus</text>
+
+  <rect class="box" x="420" y="220" width="290" height="180"/>
+  <text x="500" y="278" class="m">Prometheus</text>
+  <text x="460" y="310" class="t">scrape_interval: 15s</text>
+  <text x="460" y="340" class="t">TSDB local storage</text>
+  <text x="460" y="370" class="t">PromQL query endpoint</text>
+
+  <rect class="box" x="860" y="220" width="270" height="180"/>
+  <text x="945" y="278" class="m">Grafana</text>
+  <text x="900" y="310" class="t">dashboard panels</text>
+  <text x="900" y="340" class="t">query via PromQL</text>
+  <text x="900" y="370" class="t">alert rule evaluation</text>
+
+  <path class="line" d="M300 210 L420 265"/>
+  <path class="line" d="M300 360 L420 338"/>
+  <path class="line" d="M710 310 L860 310"/>
+
+  <rect class="box" x="70" y="500" width="1060" height="96"/>
+  <text x="106" y="558" class="t">Operational rule: set retention, watch disk usage, and prefer recording rules for expensive repeated queries.</text>
+</svg>

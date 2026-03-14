@@ -13,7 +13,7 @@ permalink: /worklog/
   <header class="wl-header">
     <h1>작업일지 Timeline</h1>
     <p>프로젝트별로 묶어서 흐름을 볼 수 있게 정리한 작업일지입니다. BSSJ 개발 기록과 블로그 운영 기록을 탭으로 구분했습니다.</p>
-    <div class="wl-stats"><span>총 항목 45개</span><span>BSSJ 38개</span><span>기타 7개</span><span>기간 2024-12-25 ~ 2026-03-12</span></div>
+    <div class="wl-stats"><span>총 항목 46개</span><span>BSSJ 38개</span><span>기타 8개</span><span>기간 2024-12-25 ~ 2026-03-14</span></div>
   </header>
 
   <section class="wl-project">
@@ -25,6 +25,15 @@ permalink: /worklog/
   </section>
 
   <ol class="wl-timeline">
+    <li class="wl-item" data-project="misc">
+      <div class="wl-dot" aria-hidden="true"></div>
+      <article class="wl-card">
+        <p class="wl-date">2026-03-14</p>
+        <span class="wl-project-chip">GitHub Blog</span>
+        <h3>GitHub Blog · Grafana + Prometheus + MCP 운영 가이드 포스팅</h3>
+        <p>Spring Boot(Java 21) 기준으로 메트릭 수집, Grafana 대시보드 구성, 알람 Webhook, MCP 기반 자동 조사 리포트 흐름까지 한 번에 정리한 장문 가이드를 작성했다. 썸네일과 다이어그램, 대시보드 목업 이미지를 함께 제작해 끝까지 읽기 쉬운 구조로 보강했다.</p>
+      </article>
+    </li>
     <li class="wl-item" data-project="misc">
       <div class="wl-dot" aria-hidden="true"></div>
       <article class="wl-card">

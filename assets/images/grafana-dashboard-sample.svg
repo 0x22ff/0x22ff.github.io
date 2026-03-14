@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="760" viewBox="0 0 1280 760" role="img" aria-labelledby="t d">
+  <title id="t">Grafana Dashboard Mock Screenshot</title>
+  <desc id="d">Mock dashboard showing request rate, latency, error rate and resource panels</desc>
+  <defs>
+    <style>
+      .bg{fill:#eef3ff}
+      .frame{fill:#fff;stroke:#c8d4ea;stroke-width:2;rx:16;ry:16}
+      .bar{fill:#f5f8ff}
+      .panel{fill:#fff;stroke:#d0dbef;stroke-width:1.8;rx:10;ry:10}
+      .h{font:700 22px 'Pretendard','Segoe UI',sans-serif;fill:#243451}
+      .t{font:500 16px 'Pretendard','Segoe UI',sans-serif;fill:#3b4a68}
+      .m{font:600 14px 'JetBrains Mono',monospace;fill:#3a5aa8}
+      .line1{fill:none;stroke:#4e79d8;stroke-width:3}
+      .line2{fill:none;stroke:#3fa06d;stroke-width:3}
+      .line3{fill:none;stroke:#e37963;stroke-width:3}
+    </style>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="1280" height="760"/>
+  <rect class="frame" x="40" y="34" width="1200" height="692"/>
+  <rect class="bar" x="40" y="34" width="1200" height="64"/>
+  <text x="74" y="74" class="h">BSSJ API Observability Dashboard (Mock)</text>
+
+  <rect class="panel" x="72" y="122" width="366" height="260"/>
+  <text x="96" y="152" class="t">HTTP Request Rate (rps)</text>
+  <path class="line1" d="M92 330 L140 298 L188 306 L236 260 L284 274 L332 236 L380 246 L428 210"/>
+
+  <rect class="panel" x="456" y="122" width="366" height="260"/>
+  <text x="480" y="152" class="t">Latency P95 (ms)</text>
+  <path class="line2" d="M476 334 L524 326 L572 320 L620 300 L668 304 L716 286 L764 274 L812 258"/>
+
+  <rect class="panel" x="840" y="122" width="366" height="260"/>
+  <text x="864" y="152" class="t">Error Rate (%)</text>
+  <path class="line3" d="M860 334 L908 336 L956 332 L1004 334 L1052 328 L1100 334 L1148 282 L1196 270"/>
+
+  <rect class="panel" x="72" y="402" width="558" height="290"/>
+  <text x="96" y="432" class="t">Top Endpoints by Latency</text>
+  <text x="100" y="474" class="m">GET /api/menu                 42ms</text>
+  <text x="100" y="506" class="m">GET /api/sermons             84ms</text>
+  <text x="100" y="538" class="m">POST /cms/auth/login        132ms</text>
+  <text x="100" y="570" class="m">GET /api/church/info         38ms</text>
+
+  <rect class="panel" x="648" y="402" width="558" height="290"/>
+  <text x="672" y="432" class="t">Resource Snapshot</text>
+  <text x="676" y="474" class="m">CPU usage                  41%</text>
+  <text x="676" y="506" class="m">Heap usage               1.2GB</text>
+  <text x="676" y="538" class="m">GC pause p95             38ms</text>
+  <text x="676" y="570" class="m">DB connection active        22</text>
+  <text x="676" y="602" class="m">Tomcat threads busy         35</text>
+</svg>

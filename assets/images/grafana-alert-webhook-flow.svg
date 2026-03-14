@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="660" viewBox="0 0 1200 660" role="img" aria-labelledby="t d">
+  <title id="t">Grafana Alert Webhook Flow</title>
+  <desc id="d">Flow from metric breach to webhook notification</desc>
+  <defs>
+    <style>
+      .bg{fill:#f6f9ff}
+      .box{fill:#fff;stroke:#cdd8ec;stroke-width:2;rx:14;ry:14}
+      .h{font:700 25px 'Pretendard','Segoe UI',sans-serif;fill:#23304d}
+      .t{font:500 20px 'Pretendard','Segoe UI',sans-serif;fill:#2f3e5d}
+      .m{font:700 17px 'JetBrains Mono',monospace;fill:#3658a7}
+      .line{stroke:#7f9fda;stroke-width:3;fill:none;marker-end:url(#arr)}
+      .warn{fill:#fff6f3;stroke:#efb4a8}
+    </style>
+    <marker id="arr" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0,10 3.5,0 7" fill="#7f9fda"/>
+    </marker>
+  </defs>
+  <rect class="bg" x="0" y="0" width="1200" height="660"/>
+  <text x="70" y="74" class="h">Alert Delivery Flow</text>
+
+  <rect class="box" x="70" y="176" width="220" height="110"/>
+  <text x="120" y="225" class="m">Prometheus</text>
+  <text x="95" y="253" class="t">metric threshold hit</text>
+
+  <rect class="box" x="360" y="176" width="230" height="110"/>
+  <text x="435" y="225" class="m">Grafana</text>
+  <text x="385" y="253" class="t">evaluate alert rule</text>
+
+  <rect class="box" x="660" y="176" width="230" height="110"/>
+  <text x="718" y="225" class="m">Contact Point</text>
+  <text x="710" y="253" class="t">Webhook endpoint</text>
+
+  <rect class="box" x="960" y="176" width="180" height="110"/>
+  <text x="1012" y="225" class="m">Worker</text>
+  <text x="996" y="253" class="t">receive JSON</text>
+
+  <path class="line" d="M290 230 L360 230"/>
+  <path class="line" d="M590 230 L660 230"/>
+  <path class="line" d="M890 230 L960 230"/>
+
+  <rect class="box warn" x="70" y="380" width="1070" height="196"/>
+  <text x="102" y="432" class="m">Webhook payload usually includes</text>
+  <text x="102" y="466" class="t">alertName, status, startsAt, labels(service/env), annotations(summary/runbook), panelURL</text>
+  <text x="102" y="502" class="t">Design tip: include runbook URL and dashboard URL in annotations to reduce incident response time.</text>
+</svg>
