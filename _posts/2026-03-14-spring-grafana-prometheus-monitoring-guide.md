@@ -7,37 +7,39 @@ tags: [spring, java21, prometheus, grafana, observability]
 thumbnail: /assets/images/thumb-grafana-prometheus-guide.svg
 ---
 
-서비스를 운영하다 보면 결국 같은 질문으로 모입니다.
+운영하다 보면 결국 이 질문으로 돌아오더라.
 
-- 지금 시스템은 정상인가?
-- 느려졌다면 어디서부터 봐야 하나?
-- 장애를 몇 분 안에 감지할 수 있나?
+- 지금 서비스 정상 맞나?
+- 느려지면 어디부터 봐야 하나?
+- 알람은 빨리 오고, 원인 파악은 가능한가?
 
-이 글은 Spring Boot(Java 21) 서비스 기준으로, **Prometheus로 수집하고 Grafana로 보는 운영 모니터링 기본 구조**를 한 번에 정리한 가이드입니다.
+이번 글은 Spring Boot(Java 21) 기준으로,  
+**Prometheus + Grafana를 실제 운영에서 쓰는 기본 뼈대**를 정리한 글이다.
 
-핵심 범위는 아래 네 가지입니다.
+핵심은 4가지다.
 
 - 메트릭 노출(Actuator + Micrometer)
-- 운영 환경에서 `/actuator` 안전하게 열기
-- Prometheus scrape 설정
-- Grafana 대시보드/알람 구성
+- `/actuator` 운영 보안
+- Prometheus 수집 설정
+- Grafana 대시보드/알람 설계
 
-## 1) 먼저 큰 그림
+## 1) 전체 흐름 먼저 한 장으로 보기
 
 ![Monitoring architecture overview](/assets/images/grafana-prometheus-overview.svg)
 
-흐름은 단순합니다.
+구조 자체는 어렵지 않다.
 
-1. Spring Boot 앱이 `/actuator/prometheus`로 메트릭을 노출
+1. Spring Boot 앱이 `/actuator/prometheus`로 메트릭 노출
 2. Prometheus가 주기적으로 scrape
-3. Grafana가 Prometheus를 데이터 소스로 조회
-4. Grafana Alerting으로 임계치 경보 발행
+3. Grafana가 Prometheus를 조회해서 시각화
+4. Grafana Alerting으로 경보 발행
 
-여기서 중요한 건 "도구를 많이 붙이는 것"보다 **초기 지표를 작게, 명확하게 시작하는 것**입니다.
+여기서 포인트는 도구를 많이 붙이는 게 아니라,  
+**초기 지표를 작게 시작하고 정확하게 보는 것**이다.
 
 ## 2) Spring Boot(Java 21)에서 메트릭 노출
 
-### 2-1. 의존성 추가
+### 2-1. 의존성
 
 ```gradle
 dependencies {
@@ -46,7 +48,7 @@ dependencies {
 }
 ```
 
-### 2-2. endpoint 노출 설정
+### 2-2. endpoint 설정
 
 ```yaml
 management:
@@ -62,7 +64,7 @@ management:
         enabled: true
 ```
 
-`management.server.port`를 분리해두면 운영 보안 정책을 적용하기가 훨씬 쉽습니다.
+`management.server.port` 분리는 나중에 보안 정책 잡을 때 진짜 편하다.
 
 ### 2-3. 커스텀 메트릭 예시
 
@@ -96,31 +98,33 @@ public class SermonMetrics {
 
 ![Micrometer flow](/assets/images/spring-boot-micrometer-flow.svg)
 
-운영에서 자주 놓치는 포인트는 태그(cardinality)입니다.
+실무에서 제일 많이 터지는 건 태그(cardinality)다.
 
-- `userId`, `requestId`, raw URL 같은 무한 증가 태그는 피하기
-- `method`, `status`, `uri`처럼 제한된 집합의 태그 사용
+- `userId`, `requestId`, raw URL 같이 값이 계속 늘어나는 태그는 피하기
+- `method`, `status`, `uri`처럼 범위가 제한된 태그 위주로 쓰기
 
-카디널리티가 커지면 Prometheus 메모리 사용량과 쿼리 비용이 빠르게 증가합니다.
+카디널리티가 커지면 Prometheus 메모리/쿼리 비용이 생각보다 빨리 올라간다.
 
 ## 3) 운영 보안: `/actuator`는 내부망 전용
 
-운영 환경에서 `/actuator`를 퍼블릭으로 열어두는 건 피하는 게 맞습니다.
+이건 거의 원칙에 가깝다.  
+운영에서 `/actuator`를 퍼블릭으로 열어두면 안 된다.
 
-권장 패턴:
+권장 패턴은 이렇다.
 
 - 앱 포트와 관리 포트 분리
-- 보안그룹(Security Group)에서 Prometheus 서버(또는 내부 SG)만 허용
+- Security Group에서 Prometheus 서버(또는 내부 SG)만 허용
 - 외부 인터넷에서 management 포트 차단
 - endpoint 최소 공개(`prometheus`, `health`, `info`)
 
 ![Actuator private access](/assets/images/actuator-private-access.svg)
 
-애플리케이션 레벨 IP 필터만으로 끝내기보다, **네트워크 레벨에서 먼저 막는 설계**가 더 안전합니다.
+앱 코드에서 IP 필터만 거는 방식보다,  
+**네트워크 레벨에서 먼저 막는 구조**가 훨씬 안전하다.
 
 ## 4) Prometheus 수집 설정
 
-아래는 시작하기 좋은 기본 예시입니다.
+처음 시작할 때는 아래 정도면 충분하다.
 
 ```yaml
 global:
@@ -135,19 +139,20 @@ scrape_configs:
 
 ![Prometheus scrape pipeline](/assets/images/prometheus-scrape-pipeline.svg)
 
-참고:
-- `host.docker.internal`은 로컬/도커 개발 예시입니다.
-- EC2/ECS/K8s 운영에서는 내부 DNS나 서비스 디스커버리 경로로 바꿔야 합니다.
+주의할 점:
 
-운영 팁:
+- `host.docker.internal`은 로컬/도커 개발용 예시
+- EC2/ECS/K8s 운영에서는 내부 DNS 또는 서비스 디스커버리 경로 사용
 
-- 처음은 `15s` 또는 `30s`로 시작
+운영에서는 보통 이렇게 시작한다.
+
+- scrape interval: `15s` 또는 `30s`
 - retention/디스크 사용량 같이 모니터링
 - 반복적으로 무거운 쿼리는 recording rule 고려
 
-## 5) Grafana 대시보드: 처음부터 크게 만들지 않기
+## 5) Grafana 대시보드: 처음부터 크게 만들 필요 없다
 
-초기 대시보드는 아래 4개 축이면 충분합니다.
+초기에는 아래 4축만 제대로 봐도 충분하다.
 
 - Request Rate (RPS)
 - Error Rate (5xx 비율)
@@ -175,8 +180,8 @@ sum(rate(http_server_requests_seconds_count{status=~"5.."}[5m]))
 sum(rate(http_server_requests_seconds_count[5m]))
 ```
 
-운영하면서 패널을 늘리는 기준은 간단합니다.  
-"문제가 생겼을 때 실제로 원인 좁히기에 도움이 되는가"만 보시면 됩니다.
+패널 추가 기준은 단순하다.  
+"장애 났을 때 원인 좁히는 데 실제로 도움 되냐" 이것만 보면 된다.
 
 ## 6) 알람 설계: 임계치보다 노이즈 관리가 더 중요
 
@@ -199,31 +204,32 @@ groups:
 
 ![Alert webhook flow](/assets/images/grafana-alert-webhook-flow.svg)
 
-알람 품질을 높이려면 아래를 같이 챙기는 게 좋습니다.
+알람 품질 올릴 때는 이것들부터 챙기면 된다.
 
 - `for` 시간으로 순간 스파이크 노이즈 줄이기
-- `severity` 라벨 기준으로 채널 분리
-- `runbook` 링크를 annotations에 넣기
-- 경보 후 조치 완료까지의 평균 시간을 추적
+- `severity` 라벨로 채널 분리
+- annotations에 `runbook` 링크 포함
+- 경보 후 조치 완료까지 걸리는 시간 추적
 
 ## 7) 운영 체크리스트
 
-처음 구축 후 바로 점검할 체크리스트입니다.
+구축 직후에 바로 확인할 체크리스트:
 
-1. Prometheus가 실제로 scrape 성공하는가
-2. Grafana 대시보드 수치가 앱 로그와 방향성이 맞는가
-3. 알람 테스트를 수동으로 한 번 발생시켜보았는가
+1. Prometheus가 scrape를 실제로 성공하는가
+2. Grafana 수치와 앱 로그의 방향성이 맞는가
+3. 알람 테스트를 수동으로 한 번 발생시켜 봤는가
 4. `/actuator`가 외부에서 차단되어 있는가
-5. 장애 대응 문서(runbook) 링크가 알람 payload에 포함되는가
+5. runbook 링크가 알람 payload에 들어가는가
 
 ![Ops loop](/assets/images/monitoring-ops-loop.svg)
 
 ## 마무리
 
-Prometheus + Grafana 조합의 장점은 복잡한 기능보다 **운영 기준선을 빠르게 세울 수 있다는 점**입니다.
+Prometheus + Grafana의 장점은 거창한 기능보다,  
+**운영 기준선을 빠르게 세울 수 있다는 점**이다.
 
 - 어떤 지표를 계속 볼지
-- 어느 지점에서 알람을 울릴지
-- 알람 후 무엇을 확인할지
+- 어디서 알람을 울릴지
+- 알람이 오면 뭘 먼저 볼지
 
-이 세 가지를 팀 기준으로 정해두면, 장애 대응 속도와 품질이 안정적으로 올라갑니다.
+이 세 가지만 팀 기준으로 맞춰도, 장애 대응 속도랑 품질이 꽤 안정적으로 올라간다.
