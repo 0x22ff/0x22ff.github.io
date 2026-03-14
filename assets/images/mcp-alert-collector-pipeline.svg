@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="t d">
+  <title id="t">MCP Alert Collector Pipeline</title>
+  <desc id="d">Hybrid ingestion design with webhook, polling batch, queue, LLM analysis and notification routing</desc>
+  <defs>
+    <style>
+      .bg{fill:#f7fbff}
+      .box{fill:#fff;stroke:#cfdcef;stroke-width:2;rx:14;ry:14}
+      .h{font:700 25px 'Pretendard','Segoe UI',sans-serif;fill:#23314e}
+      .t{font:500 18px 'Pretendard','Segoe UI',sans-serif;fill:#334663}
+      .m{font:700 16px 'JetBrains Mono',monospace;fill:#3659a7}
+      .line{stroke:#7ea0da;stroke-width:3;fill:none;marker-end:url(#arr)}
+    </style>
+    <marker id="arr" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0,10 3.5,0 7" fill="#7ea0da"/>
+    </marker>
+  </defs>
+  <rect class="bg" x="0" y="0" width="1200" height="700"/>
+  <text x="70" y="72" class="h">MCP Incident Pipeline (Webhook + Batch Reconciliation)</text>
+
+  <rect class="box" x="70" y="130" width="230" height="100"/>
+  <text x="98" y="174" class="m">Grafana Webhook</text>
+  <text x="112" y="202" class="t">real-time alert push</text>
+
+  <rect class="box" x="70" y="270" width="230" height="100"/>
+  <text x="92" y="314" class="m">Batch Poller (1m)</text>
+  <text x="106" y="342" class="t">query unresolved alerts</text>
+
+  <rect class="box" x="370" y="200" width="250" height="120"/>
+  <text x="422" y="248" class="m">Ingestion API</text>
+  <text x="408" y="276" class="t">dedupe + normalize</text>
+  <text x="413" y="304" class="t">idempotency key</text>
+
+  <rect class="box" x="690" y="200" width="210" height="120"/>
+  <text x="738" y="248" class="m">Alert Queue</text>
+  <text x="725" y="276" class="t">retry + ordering</text>
+
+  <rect class="box" x="970" y="200" width="180" height="120"/>
+  <text x="1012" y="248" class="m">Worker</text>
+  <text x="996" y="276" class="t">consume event</text>
+
+  <path class="line" d="M300 180 L370 230"/>
+  <path class="line" d="M300 320 L370 290"/>
+  <path class="line" d="M620 260 L690 260"/>
+  <path class="line" d="M900 260 L970 260"/>
+
+  <rect class="box" x="70" y="460" width="1080" height="180"/>
+  <text x="106" y="512" class="m">Worker internal steps</text>
+  <text x="106" y="544" class="t">1) fetch metrics/log/deploy context -> 2) call LLM API via MCP tools -> 3) render report markdown/json</text>
+  <text x="106" y="576" class="t">4) route output to Slack, Email, Ticketing(Jira/GitHub Issues) with severity-based channels</text>
+  <text x="106" y="608" class="t">5) persist analysis result for audit and postmortem reference</text>
+</svg>

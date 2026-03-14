@@ -48,6 +48,8 @@ dependencies {
 
 ```yaml
 management:
+  server:
+    port: 18081
   endpoints:
     web:
       exposure:
@@ -57,6 +59,19 @@ management:
       probes:
         enabled: true
 ```
+
+### 운영 보안: `/actuator`는 내부망 전용으로 제한
+
+운영 환경에서는 `/actuator`를 외부에 공개하지 않는 게 원칙입니다.
+
+- management 포트를 앱 포트와 분리
+- Security Group/NACL에서 Prometheus 서버(또는 내부 SG)만 허용
+- 노출 엔드포인트는 `prometheus`, `health`, `info`만 최소 오픈
+
+![Actuator private access](/assets/images/actuator-private-access.svg)
+
+여기서 핵심은 앱 코드 IP 필터보다 **네트워크 레벨 차단**입니다.  
+프록시/LB 뒤에서는 앱 레벨 IP 체크만으로는 우회나 오판 가능성이 있습니다.
 
 ### 커스텀 메트릭 예시
 
@@ -173,27 +188,48 @@ groups:
 
 - `POST https://ops.example.com/alerts/grafana`
 
-## 6) MCP로 자동 조사 리포트 만들기
+## 6) MCP로 자동 조사 리포트 만들기 (구체 설계)
 
 여기가 이번 글의 핵심입니다.
 
-알람이 오면 워커가 다음 순서로 움직입니다.
+질문을 많이 받는 지점이 이 부분입니다.  
+정리하면, **맞습니다.** 보통 아래 구조로 구현합니다.
 
-1. 알람 레이블(`service`, `severity`, `startsAt`) 파싱
-2. 최근 15~30분 메트릭/로그/배포 이력 수집
-3. MCP 툴 체인으로 원인 후보 정리
-4. Slack/이슈 트래커에 리포트 전송
+- MCP 서버(또는 MCP 클라이언트를 가진 워커)가 알람을 수집
+- LLM API 호출로 원인 후보/근거/액션을 생성
+- 결과를 Slack/메일/티켓 시스템으로 전송
 
 ![MCP investigation loop](/assets/images/mcp-investigation-loop.svg)
 
-워커의 의사코드는 이런 형태입니다.
+실무에서는 수집 경로를 **하이브리드**로 두는 게 안전합니다.
+
+1. 실시간: Grafana Webhook push
+2. 보정용: 배치 poller가 미수신/미해결 알람 주기 조회
+
+![MCP alert collector pipeline](/assets/images/mcp-alert-collector-pipeline.svg)
+
+왜 배치가 필요하냐면, 웹훅 전달 실패나 일시 장애가 생겼을 때 누락 복구가 필요하기 때문입니다.
+
+### 워커 처리 플로우 의사코드
 
 ```text
-onWebhook(alert):
-  context = collectMetricsAndLogs(alert.service, alert.startsAt)
-  analysis = mcpClient.analyze({ alert, context })
-  report = renderReport(analysis)
-  sendToSlack(report)
+onAlertIngest(event):
+  normalized = normalize(event)
+  if seen(normalized.idempotencyKey): return
+  enqueue(normalized)
+
+worker():
+  alert = dequeue()
+  context = {
+    metrics: queryPrometheus(alert.service, last_30m),
+    logs: queryLogs(alert.service, last_30m),
+    deploys: queryDeployHistory(alert.service, last_24h)
+  }
+  analysis = mcpClient.analyzeWithLLM({ alert, context, runbook })
+  report = renderMarkdownAndJson(analysis)
+  notifySlack(report)
+  notifyEmailIfCritical(report)
+  saveReport(report)
 ```
 
 리포트 템플릿은 아래 4개를 고정하면 팀 커뮤니케이션이 빨라집니다.
