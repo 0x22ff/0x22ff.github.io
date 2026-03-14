@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="t d">
+  <title id="t">Error Budget Math Example</title>
+  <desc id="d">Math example for 99.9% SLO over 30 days</desc>
+  <defs>
+    <style>
+      .bg{fill:#f7fbff}
+      .box{fill:#fff;stroke:#cfdaee;stroke-width:2;rx:14;ry:14}
+      .h{font:700 26px 'Pretendard','Segoe UI',sans-serif;fill:#22314f}
+      .t{font:500 20px 'Pretendard','Segoe UI',sans-serif;fill:#314261}
+      .m{font:700 18px 'JetBrains Mono',monospace;fill:#3658a7}
+    </style>
+  </defs>
+  <rect class="bg" x="0" y="0" width="1200" height="760"/>
+  <text x="70" y="74" class="h">Example: 99.9% availability SLO for 30 days</text>
+
+  <rect class="box" x="70" y="120" width="1060" height="580"/>
+  <text x="110" y="186" class="m">Total period minutes = 30 * 24 * 60 = 43,200</text>
+  <text x="110" y="236" class="m">Allowed error ratio = 1 - 0.999 = 0.001 (0.1%)</text>
+  <text x="110" y="286" class="m">Error budget in minutes = 43,200 * 0.001 = 43.2 minutes</text>
+
+  <text x="110" y="362" class="t">Interpretation:</text>
+  <text x="110" y="400" class="t">If the service is fully down, monthly budget is exhausted in about 43.2 minutes.</text>
+  <text x="110" y="438" class="t">If failures are partial, exhaustion speed depends on observed error rate.</text>
+
+  <text x="110" y="510" class="m">burn_rate = current_error_rate / allowed_error_rate</text>
+  <text x="110" y="560" class="m">Example: current error rate 1.0% and allowed 0.1% -> burn_rate = 10</text>
+  <text x="110" y="610" class="t">At burn_rate 10, budget is consumed roughly 10x faster than planned.</text>
+</svg>

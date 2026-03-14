@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="t d">
+  <title id="t">SLO SLI Error Budget Overview</title>
+  <desc id="d">Relationship among SLI, SLO, and Error Budget</desc>
+  <defs>
+    <style>
+      .bg{fill:#f6f9ff}
+      .box{fill:#fff;stroke:#cad8ec;stroke-width:2;rx:14;ry:14}
+      .h{font:700 26px 'Pretendard','Segoe UI',sans-serif;fill:#22314f}
+      .t{font:500 19px 'Pretendard','Segoe UI',sans-serif;fill:#304060}
+      .m{font:700 17px 'JetBrains Mono',monospace;fill:#3759a6}
+      .line{stroke:#7f9fda;stroke-width:3;fill:none;marker-end:url(#a)}
+    </style>
+    <marker id="a" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0,10 3.5,0 7" fill="#7f9fda"/>
+    </marker>
+  </defs>
+  <rect class="bg" x="0" y="0" width="1200" height="700"/>
+  <text x="70" y="74" class="h">How SLI, SLO, and Error Budget connect</text>
+
+  <rect class="box" x="90" y="150" width="300" height="170"/>
+  <text x="136" y="208" class="m">SLI</text>
+  <text x="124" y="238" class="t">What we measure</text>
+  <text x="124" y="270" class="t">ex) success ratio, p95 latency</text>
+
+  <rect class="box" x="450" y="150" width="300" height="170"/>
+  <text x="494" y="208" class="m">SLO</text>
+  <text x="484" y="238" class="t">Target over a period</text>
+  <text x="484" y="270" class="t">ex) availability 99.9% / 30d</text>
+
+  <rect class="box" x="810" y="150" width="300" height="170"/>
+  <text x="842" y="208" class="m">Error Budget</text>
+  <text x="844" y="238" class="t">Allowed failure amount</text>
+  <text x="844" y="270" class="t">1 - SLO</text>
+
+  <path class="line" d="M390 232 L450 232"/>
+  <path class="line" d="M750 232 L810 232"/>
+
+  <rect class="box" x="90" y="390" width="1020" height="210"/>
+  <text x="126" y="448" class="m">Operational usage</text>
+  <text x="126" y="482" class="t">1) Define SLI with clear numerator/denominator</text>
+  <text x="126" y="516" class="t">2) Agree SLO target with product/business and operations</text>
+  <text x="126" y="550" class="t">3) Use error budget consumption speed (burn rate) as alert signal</text>
+</svg>

@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="680" viewBox="0 0 1200 680" role="img" aria-labelledby="t d">
+  <title id="t">SLO Adoption Roadmap</title>
+  <desc id="d">Step-by-step SLO adoption roadmap for backend teams</desc>
+  <defs>
+    <style>
+      .bg{fill:#f7fbff}
+      .box{fill:#fff;stroke:#cfdcef;stroke-width:2;rx:14;ry:14}
+      .h{font:700 25px 'Pretendard','Segoe UI',sans-serif;fill:#23314e}
+      .t{font:500 18px 'Pretendard','Segoe UI',sans-serif;fill:#334663}
+      .m{font:700 16px 'JetBrains Mono',monospace;fill:#3659a7}
+      .line{stroke:#7ea0da;stroke-width:3;fill:none;marker-end:url(#arr)}
+    </style>
+    <marker id="arr" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0,10 3.5,0 7" fill="#7ea0da"/>
+    </marker>
+  </defs>
+  <rect class="bg" x="0" y="0" width="1200" height="680"/>
+  <text x="70" y="74" class="h">Practical SLO Adoption Roadmap</text>
+
+  <rect class="box" x="80" y="140" width="230" height="120"/>
+  <text x="112" y="190" class="m">Step 1</text>
+  <text x="112" y="220" class="t">Pick one critical API</text>
+
+  <rect class="box" x="350" y="140" width="230" height="120"/>
+  <text x="382" y="190" class="m">Step 2</text>
+  <text x="382" y="220" class="t">Define SLI formula</text>
+
+  <rect class="box" x="620" y="140" width="230" height="120"/>
+  <text x="652" y="190" class="m">Step 3</text>
+  <text x="652" y="220" class="t">Set SLO + period</text>
+
+  <rect class="box" x="890" y="140" width="230" height="120"/>
+  <text x="922" y="190" class="m">Step 4</text>
+  <text x="922" y="220" class="t">Burn-rate alerts</text>
+
+  <path class="line" d="M310 200 L350 200"/>
+  <path class="line" d="M580 200 L620 200"/>
+  <path class="line" d="M850 200 L890 200"/>
+
+  <rect class="box" x="80" y="340" width="1040" height="260"/>
+  <text x="116" y="398" class="m">Execution notes</text>
+  <text x="116" y="432" class="t">- Start from one user journey to avoid dashboard/alert explosion.</text>
+  <text x="116" y="466" class="t">- Keep numerator/denominator definitions explicit and reviewable.</text>
+  <text x="116" y="500" class="t">- Review SLO monthly with product and operations together.</text>
+  <text x="116" y="534" class="t">- Use budget trend in release discussion, not only in incident response.</text>
+</svg>

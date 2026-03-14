@@ -13,7 +13,7 @@ permalink: /worklog/
   <header class="wl-header">
     <h1>작업일지 Timeline</h1>
     <p>프로젝트별로 묶어서 흐름을 볼 수 있게 정리한 작업일지입니다. BSSJ 개발 기록과 블로그 운영 기록을 탭으로 구분했습니다.</p>
-    <div class="wl-stats"><span>총 항목 47개</span><span>BSSJ 38개</span><span>기타 9개</span><span>기간 2024-12-25 ~ 2026-03-14</span></div>
+    <div class="wl-stats"><span>총 항목 48개</span><span>BSSJ 38개</span><span>기타 10개</span><span>기간 2024-12-25 ~ 2026-03-14</span></div>
   </header>
 
   <section class="wl-project">
@@ -25,6 +25,15 @@ permalink: /worklog/
   </section>
 
   <ol class="wl-timeline">
+    <li class="wl-item" data-project="misc">
+      <div class="wl-dot" aria-hidden="true"></div>
+      <article class="wl-card">
+        <p class="wl-date">2026-03-14</p>
+        <span class="wl-project-chip">GitHub Blog</span>
+        <h3>GitHub Blog · SLO/SLI/Error Budget 실전 가이드 작성</h3>
+        <p>모니터링 다음편으로 SLO/SLI/Error Budget 글을 작성했다. 계산 가능한 수식 예시, burn rate 알람 전략, Grafana 대시보드 구성, 시작 체크리스트까지 운영 관점으로 정리하고 공식 문서 레퍼런스를 함께 정리했다.</p>
+      </article>
+    </li>
     <li class="wl-item" data-project="misc">
       <div class="wl-dot" aria-hidden="true"></div>
       <article class="wl-card">

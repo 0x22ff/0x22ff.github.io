@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="760" viewBox="0 0 1280 760" role="img" aria-labelledby="t d">
+  <title id="t">SLO Dashboard Layout Mock</title>
+  <desc id="d">Mock dashboard layout for SLI, burn rate, and budget remaining</desc>
+  <defs>
+    <style>
+      .bg{fill:#eef3ff}
+      .frame{fill:#fff;stroke:#c8d4ea;stroke-width:2;rx:16;ry:16}
+      .bar{fill:#f5f8ff}
+      .panel{fill:#fff;stroke:#d0dbef;stroke-width:1.8;rx:10;ry:10}
+      .h{font:700 22px 'Pretendard','Segoe UI',sans-serif;fill:#243451}
+      .t{font:500 16px 'Pretendard','Segoe UI',sans-serif;fill:#3b4a68}
+      .m{font:600 14px 'JetBrains Mono',monospace;fill:#3a5aa8}
+      .line1{fill:none;stroke:#4e79d8;stroke-width:3}
+      .line2{fill:none;stroke:#3fa06d;stroke-width:3}
+      .line3{fill:none;stroke:#e37963;stroke-width:3}
+    </style>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="1280" height="760"/>
+  <rect class="frame" x="40" y="34" width="1200" height="692"/>
+  <rect class="bar" x="40" y="34" width="1200" height="64"/>
+  <text x="74" y="74" class="h">SLO Operations Dashboard (Mock)</text>
+
+  <rect class="panel" x="72" y="122" width="366" height="260"/>
+  <text x="96" y="152" class="t">SLI: Availability Ratio</text>
+  <path class="line1" d="M92 330 L140 322 L188 318 L236 314 L284 318 L332 310 L380 312 L428 306"/>
+
+  <rect class="panel" x="456" y="122" width="366" height="260"/>
+  <text x="480" y="152" class="t">Burn Rate (short window)</text>
+  <path class="line3" d="M476 334 L524 330 L572 326 L620 324 L668 330 L716 300 L764 276 L812 264"/>
+
+  <rect class="panel" x="840" y="122" width="366" height="260"/>
+  <text x="864" y="152" class="t">Error Budget Remaining (%)</text>
+  <path class="line2" d="M860 286 L908 288 L956 290 L1004 292 L1052 296 L1100 304 L1148 320 L1196 334"/>
+
+  <rect class="panel" x="72" y="402" width="558" height="290"/>
+  <text x="96" y="432" class="t">Alert Status</text>
+  <text x="100" y="474" class="m">warning  : slow burn detected (1h window)</text>
+  <text x="100" y="506" class="m">critical : both short+long window exceeded</text>
+  <text x="100" y="538" class="m">runbook  : /runbooks/api-latency</text>
+
+  <rect class="panel" x="648" y="402" width="558" height="290"/>
+  <text x="672" y="432" class="t">Release Guardrail</text>
+  <text x="676" y="474" class="m">budget_remaining &gt; 70%  : normal release</text>
+  <text x="676" y="506" class="m">budget_remaining 30~70% : caution</text>
+  <text x="676" y="538" class="m">budget_remaining &lt; 30%  : freeze optional</text>
+</svg>

@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="t d">
+  <title id="t">Burn Rate Concept</title>
+  <desc id="d">How burn rate indicates budget consumption speed</desc>
+  <defs>
+    <style>
+      .bg{fill:#f6faff}
+      .panel{fill:#fff;stroke:#cfdaee;stroke-width:2;rx:14;ry:14}
+      .h{font:700 25px 'Pretendard','Segoe UI',sans-serif;fill:#22314f}
+      .t{font:500 18px 'Pretendard','Segoe UI',sans-serif;fill:#314261}
+      .m{font:700 16px 'JetBrains Mono',monospace;fill:#3557a5}
+      .good{fill:#e9f8ef;stroke:#b7dfc6}
+      .warn{fill:#fff8ea;stroke:#f0d7a9}
+      .bad{fill:#fff1f1;stroke:#e8b0b0}
+    </style>
+  </defs>
+  <rect class="bg" x="0" y="0" width="1200" height="700"/>
+  <text x="70" y="74" class="h">Burn rate tells how fast your error budget is being consumed</text>
+
+  <rect class="panel" x="80" y="130" width="1040" height="120"/>
+  <text x="120" y="200" class="m">burn_rate = current_error_rate / allowed_error_rate</text>
+
+  <rect class="panel good" x="80" y="290" width="320" height="180"/>
+  <text x="120" y="340" class="m">burn_rate &lt; 1</text>
+  <text x="120" y="374" class="t">Budget consumption is slower</text>
+  <text x="120" y="406" class="t">than planned pace.</text>
+
+  <rect class="panel warn" x="440" y="290" width="320" height="180"/>
+  <text x="480" y="340" class="m">burn_rate ~= 1</text>
+  <text x="480" y="374" class="t">Budget usage is on target.</text>
+  <text x="480" y="406" class="t">Watch trend, no panic.</text>
+
+  <rect class="panel bad" x="800" y="290" width="320" height="180"/>
+  <text x="840" y="340" class="m">burn_rate &gt; 1</text>
+  <text x="840" y="374" class="t">Budget is burning too fast.</text>
+  <text x="840" y="406" class="t">Need alert/mitigation.</text>
+
+  <rect class="panel" x="80" y="520" width="1040" height="120"/>
+  <text x="120" y="590" class="t">Use short + long window alerts together to detect both sudden spikes and slow degradation.</text>
+</svg>

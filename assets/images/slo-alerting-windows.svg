@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="t d">
+  <title id="t">Multi-window Alerting Pattern</title>
+  <desc id="d">Combine short and long windows for SLO burn-rate alerts</desc>
+  <defs>
+    <style>
+      .bg{fill:#f7fbff}
+      .box{fill:#fff;stroke:#cedaee;stroke-width:2;rx:14;ry:14}
+      .h{font:700 25px 'Pretendard','Segoe UI',sans-serif;fill:#23314e}
+      .t{font:500 18px 'Pretendard','Segoe UI',sans-serif;fill:#334663}
+      .m{font:700 16px 'JetBrains Mono',monospace;fill:#3659a7}
+      .line{stroke:#7ea0da;stroke-width:3;fill:none;marker-end:url(#arr)}
+    </style>
+    <marker id="arr" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0,10 3.5,0 7" fill="#7ea0da"/>
+    </marker>
+  </defs>
+  <rect class="bg" x="0" y="0" width="1200" height="700"/>
+  <text x="70" y="74" class="h">Alert pattern: short window + long window</text>
+
+  <rect class="box" x="90" y="150" width="300" height="160"/>
+  <text x="126" y="206" class="m">Short window</text>
+  <text x="118" y="236" class="t">Fast spike detection</text>
+  <text x="118" y="268" class="t">ex) 5m burn rate</text>
+
+  <rect class="box" x="450" y="150" width="300" height="160"/>
+  <text x="486" y="206" class="m">Long window</text>
+  <text x="478" y="236" class="t">Filter temporary noise</text>
+  <text x="478" y="268" class="t">ex) 1h burn rate</text>
+
+  <rect class="box" x="810" y="150" width="300" height="160"/>
+  <text x="846" y="206" class="m">AND condition</text>
+  <text x="838" y="236" class="t">Page only when both</text>
+  <text x="838" y="268" class="t">windows indicate risk</text>
+
+  <path class="line" d="M390 230 L450 230"/>
+  <path class="line" d="M750 230 L810 230"/>
+
+  <rect class="box" x="90" y="380" width="1020" height="240"/>
+  <text x="126" y="440" class="m">Why this helps</text>
+  <text x="126" y="476" class="t">- short window catches fast incidents early</text>
+  <text x="126" y="510" class="t">- long window prevents false positives from brief spikes</text>
+  <text x="126" y="544" class="t">- combining both improves signal-to-noise ratio in on-call alerts</text>
+</svg>
