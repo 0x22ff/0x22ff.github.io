@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "SLO/SLI/Error Budget, 운영에서 진짜로 쓰는 방식 정리"
-date: 2026-03-14 20:10:00 +0900
+date: 2026-03-15 00:10:00 +0900
 categories: [backend]
 tags: [sre, slo, sli, error-budget, prometheus, grafana]
 thumbnail: /assets/images/thumb-slo-sli-error-budget.svg
