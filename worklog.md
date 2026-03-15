@@ -13,7 +13,7 @@ permalink: /worklog/
   <header class="wl-header">
     <h1>작업일지 Timeline</h1>
     <p>프로젝트별로 묶어서 흐름을 볼 수 있게 정리한 작업일지입니다. BSSJ 개발 기록과 블로그 운영 기록을 탭으로 구분했습니다.</p>
-    <div class="wl-stats"><span>총 항목 49개</span><span>BSSJ 38개</span><span>기타 11개</span></div>
+    <div class="wl-stats"><span>총 항목 50개</span><span>BSSJ 38개</span><span>기타 12개</span></div>
   </header>
 
   <section class="wl-project">
@@ -25,6 +25,14 @@ permalink: /worklog/
   </section>
 
   <ol class="wl-timeline">
+    <li class="wl-item" data-project="misc">
+      <div class="wl-dot" aria-hidden="true"></div>
+      <article class="wl-card">
+        <span class="wl-project-chip">GitHub Blog</span>
+        <h3>GitHub Blog · Circuit Breaker 글 보강 (fallbackMethod + Spring Cloud refresh)</h3>
+        <p>Circuit Breaker 포스트를 운영 관점으로 추가 보강했다. `fallbackMethod` 기반 코드 예시를 넣고, Spring Cloud에서 설정값 변경 후 `/actuator/refresh` 또는 `/actuator/busrefresh`로 동적 반영하는 흐름, 그리고 `/actuator` 엔드포인트 역할을 명확히 정리했다.</p>
+      </article>
+    </li>
     <li class="wl-item" data-project="misc">
       <div class="wl-dot" aria-hidden="true"></div>
       <article class="wl-card">

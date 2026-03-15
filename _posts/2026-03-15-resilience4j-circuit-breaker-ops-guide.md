@@ -42,6 +42,13 @@ Circuit 없을 때는 장애가 아래처럼 번졌다.
 - 실제 상태 관리는 Resilience4j가 담당하고
 - 강제 OPEN/CLOSE는 Spring Cloud Config 값으로 제어했다.
 
+여기서 많이 헷갈리는 포인트가 하나 있다.
+
+- Spring Cloud는 Circuit/Config를 위한 **추상화 + 연동 레이어**
+- 운영 화면(UI)은 기본 제공이 아니라 보통 Grafana/Spring Boot Admin/사내 도구로 구성
+
+즉 Spring Cloud를 붙였다고 Circuit 전용 웹 콘솔이 자동으로 생기진 않는다.
+
 ## 3) 기본 설정값 (실무에서 많이 쓰는 시작점)
 
 ```yaml
@@ -64,7 +71,7 @@ management:
   endpoints:
     web:
       exposure:
-        include: health,info,prometheus,refresh
+        include: health,info,prometheus,refresh,busrefresh
 ```
 
 ![Resilience4j config mapping](/assets/images/resilience4j-config-map.svg)
@@ -99,6 +106,39 @@ public class OrderGateway {
 여기서 포인트는 fallback을 "무조건 성공처럼" 만들지 않는 거다.  
 프론트/클라이언트가 fallback 응답임을 구분할 수 있게 설계해야 운영에서 덜 꼬인다.
 
+### `fallbackMethod` 방식도 같이 쓴다
+
+팀/코드베이스에 따라 annotation 방식이 더 읽기 쉬울 때가 있다.
+
+```java
+@Service
+public class OrderQueryService {
+
+    private final ExternalOrderClient externalOrderClient;
+
+    public OrderQueryService(ExternalOrderClient externalOrderClient) {
+        this.externalOrderClient = externalOrderClient;
+    }
+
+    @io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker(
+            name = "orderApi",
+            fallbackMethod = "getOrderFallback"
+    )
+    public OrderResponse getOrder(String orderId) {
+        return externalOrderClient.getOrder(orderId);
+    }
+
+    private OrderResponse getOrderFallback(String orderId, Throwable t) {
+        return OrderResponse.fallback(orderId);
+    }
+}
+```
+
+정리하면 둘 다 가능하다.
+
+- Spring Cloud CircuitBreaker `cb.run(..., fallback)` 함수형 방식
+- Resilience4j annotation + `fallbackMethod` 방식
+
 ## 5) Circuit 상태 이해 (운영 기준)
 
 ![Resilience4j circuit states](/assets/images/resilience4j-circuit-states.svg)
@@ -122,8 +162,25 @@ public class OrderGateway {
 
 1. Spring Cloud Config 저장소에 모드 값 관리
 2. 운영자가 값 변경 (`AUTO`, `FORCED_OPEN`, `FORCED_CLOSED`)
-3. `/actuator/refresh` (또는 Bus refresh) 호출
+3. `/actuator/refresh` (단일 인스턴스) 또는 `/actuator/busrefresh` (다중 인스턴스) 호출
 4. 앱이 갱신된 모드를 읽고 Circuit 상태 전환
+
+여기서 `/actuator`는 Prometheus 전용 경로가 아니다.  
+Actuator 관리 엔드포인트 공통 베이스 경로이고, `prometheus`, `health`, `refresh` 등이 그 아래에 붙는다.
+
+예시:
+
+```bash
+# single instance refresh
+curl -X POST http://127.0.0.1:18081/actuator/refresh
+```
+
+```bash
+# multi instance refresh (Spring Cloud Bus)
+curl -X POST http://127.0.0.1:18081/actuator/busrefresh
+```
+
+운영에서는 이 엔드포인트를 외부 공개하지 않고, 내부망 + 인증으로 제한하는 걸 전제로 사용했다.
 
 ### 운영 모드 프로퍼티
 
@@ -216,3 +273,4 @@ public class CircuitStateSynchronizer {
 - Resilience4j CircuitBreaker Guide: https://resilience4j.readme.io/docs/circuitbreaker
 - Spring Cloud Config Reference: https://docs.spring.io/spring-cloud-config/docs/current/reference/html/
 - Spring Cloud Commons Refresh Scope: https://docs.spring.io/spring-cloud-commons/reference/spring-cloud-commons/application-context-services.html#refresh-scope
+- Spring Boot Actuator Endpoints: https://docs.spring.io/spring-boot/reference/actuator/endpoints.html
