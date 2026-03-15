@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="t d">
+  <title id="t">Resilience4j Circuit States</title>
+  <desc id="d">Closed, Open, Half Open and forced states overview</desc>
+  <defs>
+    <style>
+      .bg{fill:#f6f9ff}
+      .box{fill:#fff;stroke:#cad8ec;stroke-width:2;rx:14;ry:14}
+      .h{font:700 26px 'Pretendard','Segoe UI',sans-serif;fill:#22314f}
+      .t{font:500 19px 'Pretendard','Segoe UI',sans-serif;fill:#304060}
+      .m{font:700 17px 'JetBrains Mono',monospace;fill:#3759a6}
+      .line{stroke:#7f9fda;stroke-width:3;fill:none;marker-end:url(#a)}
+    </style>
+    <marker id="a" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0,10 3.5,0 7" fill="#7f9fda"/>
+    </marker>
+  </defs>
+  <rect class="bg" x="0" y="0" width="1200" height="700"/>
+  <text x="70" y="74" class="h">Circuit state transitions (Resilience4j)</text>
+
+  <rect class="box" x="90" y="160" width="280" height="140"/>
+  <text x="168" y="214" class="m">CLOSED</text>
+  <text x="130" y="244" class="t">normal call flow</text>
+  <text x="130" y="272" class="t">collect failure metrics</text>
+
+  <rect class="box" x="460" y="160" width="280" height="140"/>
+  <text x="556" y="214" class="m">OPEN</text>
+  <text x="500" y="244" class="t">fail fast</text>
+  <text x="500" y="272" class="t">no downstream call</text>
+
+  <rect class="box" x="830" y="160" width="280" height="140"/>
+  <text x="890" y="214" class="m">HALF_OPEN</text>
+  <text x="870" y="244" class="t">allow limited trial calls</text>
+  <text x="870" y="272" class="t">decide reopen or close</text>
+
+  <path class="line" d="M370 230 L460 230"/>
+  <path class="line" d="M740 230 L830 230"/>
+  <path class="line" d="M970 300 L970 390 L250 390 L250 300"/>
+
+  <rect class="box" x="90" y="460" width="1020" height="170"/>
+  <text x="126" y="520" class="m">Operator control</text>
+  <text x="126" y="554" class="t">- FORCED_OPEN: keep circuit open regardless of metrics</text>
+  <text x="126" y="586" class="t">- FORCED_CLOSED: force pass-through calls (use very carefully)</text>
+</svg>

@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="760" viewBox="0 0 1280 760" role="img" aria-labelledby="t d">
+  <title id="t">Circuit Breaker Metrics Dashboard Mock</title>
+  <desc id="d">Mock dashboard for circuit breaker calls, state and fallback ratio</desc>
+  <defs>
+    <style>
+      .bg{fill:#eef3ff}
+      .frame{fill:#fff;stroke:#c8d4ea;stroke-width:2;rx:16;ry:16}
+      .bar{fill:#f5f8ff}
+      .panel{fill:#fff;stroke:#d0dbef;stroke-width:1.8;rx:10;ry:10}
+      .h{font:700 22px 'Pretendard','Segoe UI',sans-serif;fill:#243451}
+      .t{font:500 16px 'Pretendard','Segoe UI',sans-serif;fill:#3b4a68}
+      .m{font:600 14px 'JetBrains Mono',monospace;fill:#3a5aa8}
+      .line1{fill:none;stroke:#4e79d8;stroke-width:3}
+      .line2{fill:none;stroke:#3fa06d;stroke-width:3}
+      .line3{fill:none;stroke:#e37963;stroke-width:3}
+    </style>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="1280" height="760"/>
+  <rect class="frame" x="40" y="34" width="1200" height="692"/>
+  <rect class="bar" x="40" y="34" width="1200" height="64"/>
+  <text x="74" y="74" class="h">Circuit Breaker Operations Dashboard (Mock)</text>
+
+  <rect class="panel" x="72" y="122" width="366" height="260"/>
+  <text x="96" y="152" class="t">State Timeline (0=closed,1=open,2=half_open)</text>
+  <path class="line1" d="M92 330 L140 330 L188 330 L236 274 L284 274 L332 330 L380 330 L428 330"/>
+
+  <rect class="panel" x="456" y="122" width="366" height="260"/>
+  <text x="480" y="152" class="t">Failed Calls / Slow Calls</text>
+  <path class="line3" d="M476 334 L524 326 L572 320 L620 308 L668 296 L716 280 L764 270 L812 260"/>
+
+  <rect class="panel" x="840" y="122" width="366" height="260"/>
+  <text x="864" y="152" class="t">Fallback Ratio</text>
+  <path class="line2" d="M860 334 L908 334 L956 330 L1004 320 L1052 306 L1100 296 L1148 280 L1196 264"/>
+
+  <rect class="panel" x="72" y="402" width="558" height="290"/>
+  <text x="96" y="432" class="t">Current Config Snapshot</text>
+  <text x="100" y="474" class="m">failureRateThreshold                50</text>
+  <text x="100" y="506" class="m">slowCallRateThreshold               60</text>
+  <text x="100" y="538" class="m">waitDurationInOpenState            30s</text>
+  <text x="100" y="570" class="m">permittedCallsInHalfOpen            10</text>
+
+  <rect class="panel" x="648" y="402" width="558" height="290"/>
+  <text x="672" y="432" class="t">Operator Action Log</text>
+  <text x="676" y="474" class="m">00:40  mode=AUTO</text>
+  <text x="676" y="506" class="m">00:44  mode=FORCED_OPEN</text>
+  <text x="676" y="538" class="m">00:57  mode=AUTO (recovered)</text>
+  <text x="676" y="570" class="m">01:10  circuit state CLOSED</text>
+</svg>

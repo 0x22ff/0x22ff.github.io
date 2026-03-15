@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="680" viewBox="0 0 1200 680" role="img" aria-labelledby="t d">
+  <title id="t">Failure Cascade Without Circuit Breaker</title>
+  <desc id="d">How downstream timeout can propagate to upstream service</desc>
+  <defs>
+    <style>
+      .bg{fill:#f7fbff}
+      .box{fill:#fff;stroke:#cfdcef;stroke-width:2;rx:14;ry:14}
+      .bad{fill:#fff2f2;stroke:#e8b0b0}
+      .h{font:700 25px 'Pretendard','Segoe UI',sans-serif;fill:#23314e}
+      .t{font:500 18px 'Pretendard','Segoe UI',sans-serif;fill:#334663}
+      .m{font:700 16px 'JetBrains Mono',monospace;fill:#3659a7}
+      .line{stroke:#7ea0da;stroke-width:3;fill:none;marker-end:url(#arr)}
+    </style>
+    <marker id="arr" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0,10 3.5,0 7" fill="#7ea0da"/>
+    </marker>
+  </defs>
+  <rect class="bg" x="0" y="0" width="1200" height="680"/>
+  <text x="70" y="74" class="h">Why we needed Circuit Breaker</text>
+
+  <rect class="box" x="90" y="160" width="260" height="130"/>
+  <text x="146" y="214" class="m">BSSJ API</text>
+  <text x="124" y="244" class="t">incoming requests increase</text>
+
+  <rect class="box bad" x="470" y="160" width="260" height="130"/>
+  <text x="512" y="214" class="m">External API</text>
+  <text x="503" y="244" class="t">timeouts start</text>
+
+  <rect class="box bad" x="850" y="160" width="260" height="130"/>
+  <text x="902" y="214" class="m">Thread Pool</text>
+  <text x="888" y="244" class="t">threads get blocked</text>
+
+  <path class="line" d="M350 225 L470 225"/>
+  <path class="line" d="M730 225 L850 225"/>
+
+  <rect class="box" x="90" y="370" width="1020" height="220"/>
+  <text x="126" y="430" class="m">Observed symptoms</text>
+  <text x="126" y="466" class="t">- response latency p95/p99 spikes</text>
+  <text x="126" y="500" class="t">- 5xx increases because upstream waits too long</text>
+  <text x="126" y="534" class="t">- retries from clients amplify traffic and worsen queueing</text>
+</svg>

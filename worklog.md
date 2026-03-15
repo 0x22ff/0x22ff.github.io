@@ -13,7 +13,7 @@ permalink: /worklog/
   <header class="wl-header">
     <h1>작업일지 Timeline</h1>
     <p>프로젝트별로 묶어서 흐름을 볼 수 있게 정리한 작업일지입니다. BSSJ 개발 기록과 블로그 운영 기록을 탭으로 구분했습니다.</p>
-    <div class="wl-stats"><span>총 항목 48개</span><span>BSSJ 38개</span><span>기타 10개</span></div>
+    <div class="wl-stats"><span>총 항목 49개</span><span>BSSJ 38개</span><span>기타 11개</span></div>
   </header>
 
   <section class="wl-project">
@@ -25,6 +25,14 @@ permalink: /worklog/
   </section>
 
   <ol class="wl-timeline">
+    <li class="wl-item" data-project="misc">
+      <div class="wl-dot" aria-hidden="true"></div>
+      <article class="wl-card">
+        <span class="wl-project-chip">GitHub Blog</span>
+        <h3>GitHub Blog · Resilience4j Circuit Breaker 운영 적용기 작성</h3>
+        <p>외부 API 장애 전파를 끊기 위해 적용한 Circuit Breaker 실전 사례를 정리했다. Spring Cloud CircuitBreaker 호출 코드, Resilience4j 설정값, Spring Cloud Config 기반 강제 OPEN/CLOSE 제어 흐름, 운영 지표와 롤아웃 체크리스트까지 한 번에 담았다.</p>
+      </article>
+    </li>
     <li class="wl-item" data-project="misc">
       <div class="wl-dot" aria-hidden="true"></div>
       <article class="wl-card">
