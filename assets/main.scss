@@ -218,17 +218,6 @@ a:visited {
   font-family: "JetBrains Mono", monospace;
 }
 
-.v-meta {
-  margin-top: 0.85rem;
-  padding-top: 0.8rem;
-  border-top: 1px solid var(--line);
-  color: #7b889c;
-  font-size: 0.82rem;
-  display: flex;
-  gap: 0.38rem;
-  align-items: center;
-}
-
 .v-empty {
   border: 1px dashed var(--line);
   border-radius: 12px;
@@ -417,14 +406,6 @@ a:visited {
   margin: 0.52rem 0 0;
   color: var(--muted);
   line-height: 1.62;
-}
-
-.wl-date {
-  margin: 0;
-  color: #5271c6;
-  font-size: 0.78rem;
-  font-family: "JetBrains Mono", monospace;
-  font-weight: 700;
 }
 
 .wl-project-chip {

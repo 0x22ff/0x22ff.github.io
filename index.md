@@ -30,9 +30,6 @@ title: 글
         </ul>
         {% endif %}
 
-        <div class="v-meta">
-          <span>{{ post.date | date: "%Y년 %-m월 %-d일" }}</span>
-        </div>
       </div>
     </a>
   </article>
