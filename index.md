@@ -1,6 +1,7 @@
 ---
 layout: default
-title: 글
+title: "0x22ff Journal | Java Backend Engineering Notes"
+description: "9년차 자바 백엔드 개발자의 운영 기록. Spring Boot, WebFlux, SRE, Resilience4j, 모니터링/장애 대응 실전 적용기를 다룹니다."
 ---
 
 <section class="v-tabs" aria-label="navigation tabs">
