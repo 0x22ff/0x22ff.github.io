@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="760" viewBox="0 0 1280 760" role="img" aria-labelledby="t d">
+  <title id="t">Retry Timeout Dashboard Mock</title>
+  <desc id="d">Mock dashboard for retries, timeout rate and fallback ratio</desc>
+  <defs>
+    <style>
+      .bg{fill:#eef3ff}
+      .frame{fill:#fff;stroke:#c8d4ea;stroke-width:2;rx:16;ry:16}
+      .bar{fill:#f5f8ff}
+      .panel{fill:#fff;stroke:#d0dbef;stroke-width:1.8;rx:10;ry:10}
+      .h{font:700 22px 'Pretendard','Segoe UI',sans-serif;fill:#243451}
+      .t{font:500 16px 'Pretendard','Segoe UI',sans-serif;fill:#3b4a68}
+      .m{font:600 14px 'JetBrains Mono',monospace;fill:#3a5aa8}
+      .line1{fill:none;stroke:#4e79d8;stroke-width:3}
+      .line2{fill:none;stroke:#3fa06d;stroke-width:3}
+      .line3{fill:none;stroke:#e37963;stroke-width:3}
+    </style>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="1280" height="760"/>
+  <rect class="frame" x="40" y="34" width="1200" height="692"/>
+  <rect class="bar" x="40" y="34" width="1200" height="64"/>
+  <text x="74" y="74" class="h">Retry + Timeout Operations Dashboard (Mock)</text>
+
+  <rect class="panel" x="72" y="122" width="366" height="260"/>
+  <text x="96" y="152" class="t">Retry Calls (successful_with_retry)</text>
+  <path class="line1" d="M92 334 L140 330 L188 324 L236 318 L284 312 L332 304 L380 294 L428 286"/>
+
+  <rect class="panel" x="456" y="122" width="366" height="260"/>
+  <text x="480" y="152" class="t">Timeout Rate</text>
+  <path class="line3" d="M476 334 L524 330 L572 326 L620 320 L668 310 L716 296 L764 282 L812 266"/>
+
+  <rect class="panel" x="840" y="122" width="366" height="260"/>
+  <text x="864" y="152" class="t">Fallback Ratio</text>
+  <path class="line2" d="M860 334 L908 332 L956 330 L1004 324 L1052 312 L1100 302 L1148 286 L1196 276"/>
+
+  <rect class="panel" x="72" y="402" width="558" height="290"/>
+  <text x="96" y="432" class="t">Config Snapshot</text>
+  <text x="100" y="474" class="m">maxAttempts                        3</text>
+  <text x="100" y="506" class="m">waitDuration                     200ms</text>
+  <text x="100" y="538" class="m">timeoutDuration                  800ms</text>
+  <text x="100" y="570" class="m">ignoreExceptions          ValidationException</text>
+
+  <rect class="panel" x="648" y="402" width="558" height="290"/>
+  <text x="672" y="432" class="t">Action Notes</text>
+  <text x="676" y="474" class="m">increase timeout? only after downstream fix check</text>
+  <text x="676" y="506" class="m">reduce maxAttempts when retry storm detected</text>
+  <text x="676" y="538" class="m">review idempotency before enabling retry on writes</text>
+</svg>

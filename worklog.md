@@ -13,7 +13,7 @@ permalink: /worklog/
   <header class="wl-header">
     <h1>작업일지 Timeline</h1>
     <p>프로젝트별로 묶어서 흐름을 볼 수 있게 정리한 작업일지입니다. BSSJ 개발 기록과 블로그 운영 기록을 탭으로 구분했습니다.</p>
-    <div class="wl-stats"><span>총 항목 50개</span><span>BSSJ 38개</span><span>기타 12개</span></div>
+    <div class="wl-stats"><span>총 항목 51개</span><span>BSSJ 38개</span><span>기타 13개</span></div>
   </header>
 
   <section class="wl-project">
@@ -25,6 +25,14 @@ permalink: /worklog/
   </section>
 
   <ol class="wl-timeline">
+    <li class="wl-item" data-project="misc">
+      <div class="wl-dot" aria-hidden="true"></div>
+      <article class="wl-card">
+        <span class="wl-project-chip">GitHub Blog</span>
+        <h3>GitHub Blog · Resilience4j Retry + Timeout 운영기 작성</h3>
+        <p>Retry와 Timeout을 운영에서 어떻게 묶어야 하는지 적용 예시 중심으로 정리했다. 재시도 대상/비대상 기준, Resilience4j 설정값 시작점, TimeLimiter+Retry 호출 코드, 관측 지표와 롤아웃 체크리스트까지 함께 작성했다.</p>
+      </article>
+    </li>
     <li class="wl-item" data-project="misc">
       <div class="wl-dot" aria-hidden="true"></div>
       <article class="wl-card">
