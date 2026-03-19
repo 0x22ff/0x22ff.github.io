@@ -24,6 +24,14 @@ permalink: /worklog/
     </div>
   </section>
 
+  <section class="wl-search" aria-label="작업일지 검색">
+    <label class="search-label" for="worklog-search-input">작업일지 검색</label>
+    <div class="search-row">
+      <input id="worklog-search-input" class="search-input" type="search" placeholder="Task 번호, 제목, 설명으로 검색" autocomplete="off">
+      <button class="search-clear" type="button" data-worklog-search-clear hidden>지우기</button>
+    </div>
+  </section>
+
   <ol class="wl-timeline">
     <li class="wl-item" data-project="misc">
       <div class="wl-dot" aria-hidden="true"></div>
@@ -434,32 +442,59 @@ permalink: /worklog/
       </article>
     </li>
   </ol>
+  <p class="wl-empty" data-worklog-empty hidden>조건에 맞는 작업일지가 없습니다.</p>
 </section>
 
 <script>
   (function () {
     const buttons = document.querySelectorAll('.wl-project-tabs button[data-project]');
     const items = document.querySelectorAll('.wl-item[data-project]');
+    const input = document.getElementById('worklog-search-input');
+    const clear = document.querySelector('[data-worklog-search-clear]');
+    const empty = document.querySelector('[data-worklog-empty]');
     if (!buttons.length || !items.length) return;
 
-    function applyFilter(project) {
+    let activeProject = 'bssj';
+
+    function applyFilter() {
+      const query = input ? input.value.trim().toLowerCase() : '';
+
       buttons.forEach((btn) => {
-        const active = btn.dataset.project === project;
+        const active = btn.dataset.project === activeProject;
         btn.classList.toggle('active', active);
         btn.setAttribute('aria-selected', active ? 'true' : 'false');
       });
 
+      let visibleCount = 0;
       items.forEach((item) => {
-        item.hidden = item.dataset.project !== project;
+        const matchesProject = item.dataset.project === activeProject;
+        const text = item.textContent.toLowerCase();
+        const matchesQuery = !query || text.includes(query);
+        const visible = matchesProject && matchesQuery;
+        item.hidden = !visible;
+        if (visible) visibleCount += 1;
       });
+
+      if (clear) clear.hidden = query.length === 0;
+      if (empty) empty.hidden = visibleCount !== 0;
     }
 
     buttons.forEach((btn) => {
       btn.addEventListener('click', function () {
-        applyFilter(btn.dataset.project);
+        activeProject = btn.dataset.project;
+        applyFilter();
       });
     });
 
-    applyFilter('bssj');
+    if (input) input.addEventListener('input', applyFilter);
+    if (clear && input) {
+      clear.addEventListener('click', function () {
+        input.value = '';
+        applyFilter();
+        input.focus();
+      });
+    }
+
+    applyFilter();
   })();
 </script>
