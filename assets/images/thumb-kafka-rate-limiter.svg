@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="t d">
+  <title id="t">Kafka Consumer RateLimiter Guide</title>
+  <desc id="d">Thumbnail for kafka consumer 1 msg per second with resilience4j rate limiter</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#eef6ff"/>
+      <stop offset="100%" stop-color="#f9fbff"/>
+    </linearGradient>
+    <style>
+      .title{font:700 48px 'Pretendard','Segoe UI',sans-serif;fill:#1f2a44}
+      .sub{font:600 24px 'Pretendard','Segoe UI',sans-serif;fill:#4b5a77}
+      .box{fill:#fff;stroke:#cfdaec;stroke-width:2;rx:14;ry:14}
+      .mono{font:700 21px 'JetBrains Mono',monospace;fill:#3658a7}
+      .line{stroke:#7ea0dc;stroke-width:3;fill:none;marker-end:url(#arr)}
+    </style>
+    <marker id="arr" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0,10 3.5,0 7" fill="#7ea0dc"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="1200" height="630" fill="url(#bg)"/>
+  <rect x="72" y="78" width="1056" height="476" class="box"/>
+  <text x="130" y="202" class="title">Kafka Consumer RateLimiter</text>
+  <text x="130" y="246" class="sub">Consume and process at 1 message per second</text>
+
+  <rect x="130" y="338" width="240" height="72" class="box"/>
+  <text x="196" y="383" class="mono">Kafka</text>
+  <rect x="480" y="338" width="240" height="72" class="box"/>
+  <text x="516" y="383" class="mono">Consumer</text>
+  <rect x="830" y="338" width="240" height="72" class="box"/>
+  <text x="860" y="383" class="mono">1 msg/sec</text>
+  <path d="M370 374 L480 374" class="line"/>
+  <path d="M720 374 L830 374" class="line"/>
+</svg>

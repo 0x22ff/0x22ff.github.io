@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="t d">
+  <title id="t">Kafka RateLimiter Rollout Checklist</title>
+  <desc id="d">Safe rollout sequence for applying rate limiter to kafka consumers</desc>
+  <defs>
+    <style>
+      .bg{fill:#f7f9ff}
+      .h{font:700 30px 'Pretendard','Segoe UI',sans-serif;fill:#1f2b45}
+      .box{fill:#fff;stroke:#cad7ec;stroke-width:2;rx:16;ry:16}
+      .n{font:700 22px 'JetBrains Mono',monospace;fill:#3658a7}
+      .s{font:600 20px 'Pretendard','Segoe UI',sans-serif;fill:#304160}
+      .t{font:500 18px 'Pretendard','Segoe UI',sans-serif;fill:#415472}
+      .line{stroke:#7f9fda;stroke-width:3;fill:none;marker-end:url(#arr)}
+    </style>
+    <marker id="arr" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0,10 3.5,0 7" fill="#7f9fda"/>
+    </marker>
+  </defs>
+  <rect class="bg" x="0" y="0" width="1200" height="760"/>
+  <text x="70" y="80" class="h">Rollout steps for consumer-side rate limiting</text>
+
+  <rect class="box" x="90" y="150" width="300" height="180"/>
+  <text x="124" y="205" class="n">01</text>
+  <text x="124" y="244" class="s">Current baseline</text>
+  <text x="124" y="278" class="t">현재 TPS, lag, 에러율 확보</text>
+
+  <rect class="box" x="450" y="150" width="300" height="180"/>
+  <text x="484" y="205" class="n">02</text>
+  <text x="484" y="244" class="s">Canary consumer</text>
+  <text x="484" y="278" class="t">일부 파티션/인스턴스에만 적용</text>
+
+  <rect class="box" x="810" y="150" width="300" height="180"/>
+  <text x="844" y="205" class="n">03</text>
+  <text x="844" y="244" class="s">Observe 24h</text>
+  <text x="844" y="278" class="t">lag/permit denied 추세 관찰</text>
+
+  <rect class="box" x="270" y="420" width="300" height="180"/>
+  <text x="304" y="475" class="n">04</text>
+  <text x="304" y="514" class="s">Scale rollout</text>
+  <text x="304" y="548" class="t">점진적으로 전체 consumer 확대</text>
+
+  <rect class="box" x="630" y="420" width="300" height="180"/>
+  <text x="664" y="475" class="n">05</text>
+  <text x="664" y="514" class="s">Runbook finalize</text>
+  <text x="664" y="548" class="t">장애 대응 절차/알람 임계치 확정</text>
+
+  <path class="line" d="M390 240 L450 240"/>
+  <path class="line" d="M750 240 L810 240"/>
+  <path class="line" d="M960 330 C960 380 780 390 780 420"/>
+  <path class="line" d="M570 510 L630 510"/>
+</svg>

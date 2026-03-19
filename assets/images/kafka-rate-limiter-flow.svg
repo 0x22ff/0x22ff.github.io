@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="t d">
+  <title id="t">Kafka Consumer RateLimiter Flow</title>
+  <desc id="d">Flow of consuming Kafka record and applying resilience4j rate limiter</desc>
+  <defs>
+    <style>
+      .bg{fill:#f6f9ff}
+      .box{fill:#fff;stroke:#cad8ec;stroke-width:2;rx:14;ry:14}
+      .h{font:700 26px 'Pretendard','Segoe UI',sans-serif;fill:#22314f}
+      .t{font:500 19px 'Pretendard','Segoe UI',sans-serif;fill:#304060}
+      .m{font:700 17px 'JetBrains Mono',monospace;fill:#3759a6}
+      .line{stroke:#7f9fda;stroke-width:3;fill:none;marker-end:url(#a)}
+    </style>
+    <marker id="a" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0,10 3.5,0 7" fill="#7f9fda"/>
+    </marker>
+  </defs>
+  <rect class="bg" x="0" y="0" width="1200" height="700"/>
+  <text x="70" y="74" class="h">Kafka consumer flow with 1 msg/sec limiter</text>
+
+  <rect class="box" x="90" y="170" width="240" height="120"/>
+  <text x="166" y="218" class="m">poll</text>
+  <text x="132" y="248" class="t">1 record fetched</text>
+
+  <rect class="box" x="410" y="170" width="240" height="120"/>
+  <text x="440" y="218" class="m">RateLimiter</text>
+  <text x="434" y="248" class="t">acquirePermission()</text>
+
+  <rect class="box" x="730" y="170" width="240" height="120"/>
+  <text x="780" y="218" class="m">Business</text>
+  <text x="770" y="248" class="t">process message</text>
+
+  <rect class="box" x="1050" y="170" width="120" height="120"/>
+  <text x="1080" y="218" class="m">ack</text>
+  <text x="1062" y="248" class="t">commit</text>
+
+  <path class="line" d="M330 230 L410 230"/>
+  <path class="line" d="M650 230 L730 230"/>
+  <path class="line" d="M970 230 L1050 230"/>
+
+  <rect class="box" x="90" y="390" width="1080" height="220"/>
+  <text x="126" y="452" class="m">Operational constraints</text>
+  <text x="126" y="486" class="t">- consumer concurrency should be controlled to keep global throughput predictable</text>
+  <text x="126" y="520" class="t">- if permit is denied, do not ack and let retry/backoff policy handle safely</text>
+  <text x="126" y="554" class="t">- monitor lag to avoid hidden queue accumulation</text>
+</svg>

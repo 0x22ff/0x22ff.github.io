@@ -29,8 +29,8 @@ permalink: /worklog/
       <div class="wl-dot" aria-hidden="true"></div>
       <article class="wl-card">
         <span class="wl-project-chip">GitHub Blog</span>
-        <h3>GitHub Blog · Resilience4j Retry + Timeout 운영기 작성</h3>
-        <p>Retry와 Timeout을 운영에서 어떻게 묶어야 하는지 적용 예시 중심으로 정리했다. 재시도 대상/비대상 기준, Resilience4j 설정값 시작점, TimeLimiter+Retry 호출 코드, 관측 지표와 롤아웃 체크리스트까지 함께 작성했다.</p>
+        <h3>GitHub Blog · Kafka Consumer RateLimiter(초당 1건) 운영 적용기 작성</h3>
+        <p>Kafka consumer에서 메시지를 초당 1건으로 처리했던 실제 사례를 기준으로 글을 작성했다. `limitForPeriod=1`, `limitRefreshPeriod=1s` 설정, manual ack 분기, permit 미획득 시 재시도/백오프 처리, lag/처리량/거부율 관측 포인트까지 운영 흐름 중심으로 정리했다.</p>
       </article>
     </li>
     <li class="wl-item" data-project="misc">

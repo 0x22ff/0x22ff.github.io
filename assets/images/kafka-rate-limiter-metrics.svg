@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="t d">
+  <title id="t">Kafka RateLimiter Metrics Dashboard</title>
+  <desc id="d">Key metrics for rate-limited kafka consumers</desc>
+  <defs>
+    <style>
+      .bg{fill:#f4f7ff}
+      .card{fill:#fff;stroke:#cbd8ee;stroke-width:2;rx:16;ry:16}
+      .h{font:700 30px 'Pretendard','Segoe UI',sans-serif;fill:#1d2b46}
+      .s{font:600 20px 'Pretendard','Segoe UI',sans-serif;fill:#334562}
+      .t{font:500 18px 'Pretendard','Segoe UI',sans-serif;fill:#415472}
+      .k{font:700 28px 'JetBrains Mono',monospace;fill:#3658a7}
+      .good{fill:#2e9b63}
+      .warn{fill:#d18a1f}
+      .bad{fill:#c64545}
+    </style>
+  </defs>
+  <rect class="bg" x="0" y="0" width="1200" height="760"/>
+  <text x="70" y="80" class="h">Dashboard: is 1 msg/sec policy healthy?</text>
+
+  <rect class="card" x="70" y="130" width="340" height="240"/>
+  <text x="102" y="180" class="s">Processed TPS</text>
+  <text x="102" y="252" class="k">0.98 ~ 1.02</text>
+  <text x="102" y="310" class="t">목표 처리량 근접 여부</text>
+
+  <rect class="card" x="430" y="130" width="340" height="240"/>
+  <text x="462" y="180" class="s">Consumer Lag</text>
+  <text x="462" y="252" class="k">stable / rising</text>
+  <text x="462" y="310" class="t">누적 지연 위험 신호</text>
+
+  <rect class="card" x="790" y="130" width="340" height="240"/>
+  <text x="822" y="180" class="s">Permit Denied</text>
+  <text x="822" y="252" class="k">0 or low</text>
+  <text x="822" y="310" class="t">리밋 거부율 과다 여부</text>
+
+  <rect class="card" x="70" y="410" width="1060" height="280"/>
+  <text x="104" y="464" class="s">Interpretation guide</text>
+  <circle cx="116" cy="514" r="8" class="good"/>
+  <text x="140" y="520" class="t">TPS ~= 1, lag flat, denied low -> 설정 정상</text>
+
+  <circle cx="116" cy="560" r="8" class="warn"/>
+  <text x="140" y="566" class="t">TPS < 1, lag slowly rising -> 처리 로직 지연 혹은 permit 부족 점검</text>
+
+  <circle cx="116" cy="606" r="8" class="bad"/>
+  <text x="140" y="612" class="t">lag 급증 + error 증가 -> 리밋 값, consumer 수, DLT 정책 즉시 재검토</text>
+
+  <text x="104" y="656" class="t">운영에서는 lag 알람과 permit denied 알람을 같이 걸어야 원인 분리가 빠르다.</text>
+</svg>
