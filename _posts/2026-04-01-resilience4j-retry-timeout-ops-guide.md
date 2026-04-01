@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Resilience4j Retry + TimeLimiter, 운영에서 안전하게 붙이는 방법"
-date: 2026-04-01 13:20:00 +0900
+date: 2026-04-01 13:10:00 +0900
 categories: [backend]
 tags: [spring, resilience4j, retry, timelimiter, timeout, sre]
 thumbnail: /assets/images/thumb-retry-timeout-resilience4j.svg
