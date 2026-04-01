@@ -1,13 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="t d">
-  <title id="t">Retry and Timeout Call Flow</title>
-  <desc id="d">Call flow with TimeLimiter and Retry layers</desc>
+  <title id="t">Timeout과 Retry 호출 흐름</title>
+  <desc id="d">시도별 timeout 상한과 제한된 retry를 함께 두는 흐름</desc>
   <defs>
     <style>
       .bg{fill:#f6f9ff}
       .box{fill:#fff;stroke:#cad8ec;stroke-width:2;rx:14;ry:14}
       .h{font:700 26px 'Pretendard','Segoe UI',sans-serif;fill:#22314f}
       .t{font:500 19px 'Pretendard','Segoe UI',sans-serif;fill:#304060}
-      .m{font:700 17px 'JetBrains Mono',monospace;fill:#3759a6}
+      .m{font:700 18px 'Pretendard','Segoe UI',sans-serif;fill:#3759a6}
       .line{stroke:#7f9fda;stroke-width:3;fill:none;marker-end:url(#a)}
     </style>
     <marker id="a" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
@@ -15,26 +15,34 @@
     </marker>
   </defs>
   <rect class="bg" x="0" y="0" width="1200" height="700"/>
-  <text x="70" y="74" class="h">Request flow with Timeout + Retry policy</text>
+  <text x="70" y="74" class="h">Timeout + Retry를 같이 두는 호출 흐름</text>
 
   <rect class="box" x="90" y="170" width="240" height="120"/>
-  <text x="160" y="218" class="m">Request</text>
-  <text x="136" y="248" class="t">incoming call</text>
+  <text x="170" y="218" class="m">요청</text>
+  <text x="132" y="248" class="t">호출 시작</text>
 
   <rect class="box" x="410" y="170" width="240" height="120"/>
-  <text x="456" y="218" class="m">TimeLimiter</text>
-  <text x="444" y="248" class="t">attempt timeout</text>
+  <text x="475" y="218" class="m">Timeout</text>
+  <text x="430" y="248" class="t">시도별 상한 시간 적용</text>
 
   <rect class="box" x="730" y="170" width="240" height="120"/>
-  <text x="808" y="218" class="m">Retry</text>
-  <text x="764" y="248" class="t">limited attempts</text>
+  <text x="815" y="218" class="m">Retry</text>
+  <text x="756" y="248" class="t">재시도 대상인지 판단</text>
+
+  <rect class="box" x="980" y="170" width="140" height="120"/>
+  <text x="1016" y="218" class="m">응답</text>
+  <text x="1000" y="248" class="t">성공/실패</text>
 
   <path class="line" d="M330 230 L410 230"/>
   <path class="line" d="M650 230 L730 230"/>
+  <path class="line" d="M970 230 L980 230"/>
 
-  <rect class="box" x="90" y="390" width="880" height="200"/>
-  <text x="126" y="452" class="m">Decision</text>
-  <text x="126" y="486" class="t">- if timeout/temporary failure and retryable -> retry until maxAttempts</text>
-  <text x="126" y="520" class="t">- if non-retryable -> fail fast</text>
-  <text x="126" y="554" class="t">- after max attempts -> fallback or propagated error</text>
+  <rect class="box" x="90" y="390" width="1030" height="220"/>
+  <text x="126" y="452" class="m">판단 기준</text>
+  <text x="126" y="486" class="t">
+    <tspan x="126" dy="0">- timeout 또는 일시 장애이면서 retry 대상이면</tspan>
+    <tspan x="126" dy="28">  `maxAttempts` 안에서만 다시 시도한다</tspan>
+  </text>
+  <text x="126" y="548" class="t">- retry 대상이 아니면 바로 fail-fast 한다</text>
+  <text x="126" y="582" class="t">- 시도를 다 쓰면 fallback 또는 최종 에러를 반환한다</text>
 </svg>

@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1280" height="760" viewBox="0 0 1280 760" role="img" aria-labelledby="t d">
-  <title id="t">Retry Timeout Dashboard Mock</title>
-  <desc id="d">Mock dashboard for retries, timeout rate and fallback ratio</desc>
+  <title id="t">Retry와 Timeout 운영 대시보드</title>
+  <desc id="d">재시도 성공, timeout 비율, fallback 비율을 같이 보는 예시 대시보드</desc>
   <defs>
     <style>
       .bg{fill:#eef3ff}
@@ -19,30 +19,30 @@
   <rect class="bg" x="0" y="0" width="1280" height="760"/>
   <rect class="frame" x="40" y="34" width="1200" height="692"/>
   <rect class="bar" x="40" y="34" width="1200" height="64"/>
-  <text x="74" y="74" class="h">Retry + Timeout Operations Dashboard (Mock)</text>
+  <text x="74" y="74" class="h">Retry + Timeout 운영 대시보드 예시</text>
 
   <rect class="panel" x="72" y="122" width="366" height="260"/>
-  <text x="96" y="152" class="t">Retry Calls (successful_with_retry)</text>
+  <text x="96" y="152" class="t">재시도 후 성공 호출</text>
   <path class="line1" d="M92 334 L140 330 L188 324 L236 318 L284 312 L332 304 L380 294 L428 286"/>
 
   <rect class="panel" x="456" y="122" width="366" height="260"/>
-  <text x="480" y="152" class="t">Timeout Rate</text>
+  <text x="480" y="152" class="t">Timeout 비율</text>
   <path class="line3" d="M476 334 L524 330 L572 326 L620 320 L668 310 L716 296 L764 282 L812 266"/>
 
   <rect class="panel" x="840" y="122" width="366" height="260"/>
-  <text x="864" y="152" class="t">Fallback Ratio</text>
+  <text x="864" y="152" class="t">Fallback 비율</text>
   <path class="line2" d="M860 334 L908 332 L956 330 L1004 324 L1052 312 L1100 302 L1148 286 L1196 276"/>
 
   <rect class="panel" x="72" y="402" width="558" height="290"/>
-  <text x="96" y="432" class="t">Config Snapshot</text>
+  <text x="96" y="432" class="t">설정 스냅샷</text>
   <text x="100" y="474" class="m">maxAttempts                        3</text>
   <text x="100" y="506" class="m">waitDuration                     200ms</text>
   <text x="100" y="538" class="m">timeoutDuration                  800ms</text>
   <text x="100" y="570" class="m">ignoreExceptions          ValidationException</text>
 
   <rect class="panel" x="648" y="402" width="558" height="290"/>
-  <text x="672" y="432" class="t">Action Notes</text>
-  <text x="676" y="474" class="m">increase timeout? only after downstream fix check</text>
-  <text x="676" y="506" class="m">reduce maxAttempts when retry storm detected</text>
-  <text x="676" y="538" class="m">review idempotency before enabling retry on writes</text>
+  <text x="672" y="432" class="t">운영 메모</text>
+  <text x="676" y="474" class="t">- timeout 확대는 다운스트림 원인 확인 뒤에만 검토</text>
+  <text x="676" y="506" class="t">- retry 폭증이 보이면 maxAttempts부터 다시 줄인다</text>
+  <text x="676" y="538" class="t">- 쓰기 요청은 idempotency 검토 전에는 retry를 열지 않는다</text>
 </svg>
