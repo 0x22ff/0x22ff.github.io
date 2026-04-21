@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="t d">
+  <title id="t">SemaphoreBulkhead와 ThreadPoolBulkhead 비교</title>
+  <desc id="d">SemaphoreBulkhead는 permit으로 동시 실행을 제한하고 ThreadPoolBulkhead는 별도 thread pool과 queue로 실행 영역을 격리한다</desc>
+  <defs>
+    <style>
+      .bg{fill:#f7fbff}
+      .panel{fill:#fff;stroke:#ccd9ea;stroke-width:2;rx:18;ry:18}
+      .chip{fill:#e9f5f2;stroke:#6fb4a6;stroke-width:2;rx:16;ry:16}
+      .queue{fill:#fff8e8;stroke:#d6a847;stroke-width:2;rx:12;ry:12}
+      .h{font:700 28px 'Pretendard','Segoe UI',sans-serif;fill:#22314f}
+      .t{font:500 19px 'Pretendard','Segoe UI',sans-serif;fill:#334155}
+      .m{font:700 22px 'Pretendard','Segoe UI',sans-serif;fill:#22675c}
+      .line{stroke:#7f9fda;stroke-width:3;fill:none;marker-end:url(#a)}
+    </style>
+    <marker id="a" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0,10 3.5,0 7" fill="#7f9fda"/>
+    </marker>
+  </defs>
+  <rect class="bg" width="1200" height="700"/>
+  <text x="70" y="76" class="h">Bulkhead 타입 선택 기준</text>
+
+  <rect class="panel" x="80" y="130" width="500" height="470"/>
+  <text x="120" y="190" class="m">SemaphoreBulkhead</text>
+  <text x="120" y="230" class="t">호출 thread는 그대로 두고 permit만 제한</text>
+  <rect class="chip" x="125" y="300" width="100" height="70"/>
+  <text x="150" y="343" class="t">permit</text>
+  <rect class="chip" x="250" y="300" width="100" height="70"/>
+  <text x="275" y="343" class="t">permit</text>
+  <rect class="chip" x="375" y="300" width="100" height="70"/>
+  <text x="400" y="343" class="t">permit</text>
+  <path class="line" d="M175 410 L425 410"/>
+  <text x="120" y="482" class="t">좋은 경우: 동시성만 제한하면 충분한 호출</text>
+  <text x="120" y="518" class="t">주의: 호출 thread가 대기할 수 있음</text>
+
+  <rect class="panel" x="620" y="130" width="500" height="470"/>
+  <text x="660" y="190" class="m">ThreadPoolBulkhead</text>
+  <text x="660" y="230" class="t">별도 pool과 bounded queue로 실행 영역 분리</text>
+  <rect class="queue" x="665" y="292" width="130" height="86"/>
+  <text x="696" y="328" class="t">queue</text>
+  <text x="692" y="354" class="t">capacity</text>
+  <path class="line" d="M795 335 L860 335"/>
+  <rect class="chip" x="860" y="282" width="210" height="106"/>
+  <text x="905" y="326" class="t">bulkhead</text>
+  <text x="915" y="354" class="t">thread pool</text>
+  <text x="660" y="482" class="t">좋은 경우: 블로킹 I/O를 격리해야 할 때</text>
+  <text x="660" y="518" class="t">주의: queue가 크면 장애가 늦게 드러남</text>
+</svg>

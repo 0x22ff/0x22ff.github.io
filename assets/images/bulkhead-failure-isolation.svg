@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-labelledby="t d">
+  <title id="t">Bulkhead 장애 격리 흐름</title>
+  <desc id="d">외부 API 지연이 Bulkhead 없이 전체 서비스로 번지는 흐름과 Bulkhead 적용 후 격리되는 흐름</desc>
+  <defs>
+    <style>
+      .bg{fill:#f6f9ff}
+      .panel{fill:#fff;stroke:#d2deec;stroke-width:2;rx:18;ry:18}
+      .bad{fill:#fff1f1;stroke:#ef8a8a;stroke-width:2;rx:14;ry:14}
+      .good{fill:#eaf7f3;stroke:#6fb4a6;stroke-width:2;rx:14;ry:14}
+      .neutral{fill:#ffffff;stroke:#c7d7eb;stroke-width:2;rx:14;ry:14}
+      .h{font:700 28px 'Pretendard','Segoe UI',sans-serif;fill:#22314f}
+      .t{font:500 19px 'Pretendard','Segoe UI',sans-serif;fill:#334155}
+      .m{font:700 20px 'Pretendard','Segoe UI',sans-serif;fill:#1f6b60}
+      .r{font:700 20px 'Pretendard','Segoe UI',sans-serif;fill:#b34b4b}
+      .line{stroke:#7f9fda;stroke-width:3;fill:none;marker-end:url(#a)}
+      .warn{stroke:#ef8a8a;stroke-width:3;fill:none;marker-end:url(#b)}
+      .wall{stroke:#2f6f66;stroke-width:6;stroke-linecap:round}
+    </style>
+    <marker id="a" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0,10 3.5,0 7" fill="#7f9fda"/>
+    </marker>
+    <marker id="b" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0,10 3.5,0 7" fill="#ef8a8a"/>
+    </marker>
+  </defs>
+  <rect class="bg" x="0" y="0" width="1200" height="720"/>
+  <text x="70" y="76" class="h">Bulkhead가 막는 장애 전파</text>
+
+  <rect class="panel" x="70" y="120" width="500" height="520"/>
+  <text x="105" y="170" class="r">Bulkhead 없음</text>
+  <rect class="neutral" x="110" y="220" width="160" height="92"/>
+  <text x="150" y="274" class="t">요청 증가</text>
+  <rect class="bad" x="340" y="220" width="160" height="92"/>
+  <text x="376" y="262" class="r">외부 API</text>
+  <text x="374" y="288" class="t">느린 응답</text>
+  <path class="warn" d="M270 266 L340 266"/>
+  <rect class="bad" x="110" y="390" width="390" height="122"/>
+  <text x="144" y="438" class="r">공용 스레드/커넥션 점유</text>
+  <text x="144" y="472" class="t">관련 없는 기능까지 같이 느려짐</text>
+  <path class="warn" d="M420 312 C420 356 330 360 305 390"/>
+
+  <rect class="panel" x="630" y="120" width="500" height="520"/>
+  <text x="665" y="170" class="m">Bulkhead 적용</text>
+  <rect class="neutral" x="670" y="220" width="160" height="92"/>
+  <text x="710" y="274" class="t">요청 증가</text>
+  <line x1="865" y1="206" x2="865" y2="326" class="wall"/>
+  <rect class="good" x="920" y="220" width="160" height="92"/>
+  <text x="955" y="262" class="m">외부 API</text>
+  <text x="960" y="288" class="t">격리된 포화</text>
+  <path class="line" d="M830 266 L920 266"/>
+  <rect class="good" x="670" y="390" width="390" height="122"/>
+  <text x="704" y="438" class="m">동시 실행/큐 제한</text>
+  <text x="704" y="472" class="t">나머지 기능은 실행 공간을 유지</text>
+</svg>
