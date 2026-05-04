@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-labelledby="t d">
+  <title id="t">Bulkhead 운영 대시보드</title>
+  <desc id="d">Bulkhead 운영에서 permit, queue, rejection, latency를 함께 보는 대시보드 예시</desc>
+  <defs>
+    <style>
+      .bg{fill:#f6f9ff}
+      .card{fill:#fff;stroke:#d2deec;stroke-width:2;rx:16;ry:16}
+      .h{font:700 28px 'Pretendard','Segoe UI',sans-serif;fill:#22314f}
+      .t{font:500 18px 'Pretendard','Segoe UI',sans-serif;fill:#334155}
+      .m{font:700 22px 'Pretendard','Segoe UI',sans-serif;fill:#22675c}
+      .axis{stroke:#c5d3e6;stroke-width:2}
+      .line1{stroke:#2f7f72;stroke-width:4;fill:none}
+      .line2{stroke:#d69d35;stroke-width:4;fill:none}
+      .line3{stroke:#d75f5f;stroke-width:4;fill:none}
+      .bar{fill:#8abdb3}
+      .bar2{fill:#efc36e}
+    </style>
+  </defs>
+  <rect class="bg" width="1200" height="720"/>
+  <text x="70" y="76" class="h">Bulkhead 운영에서 같이 보는 지표</text>
+
+  <rect class="card" x="80" y="125" width="500" height="220"/>
+  <text x="115" y="175" class="m">Available Permits</text>
+  <line x1="115" y1="300" x2="525" y2="300" class="axis"/>
+  <line x1="115" y1="205" x2="115" y2="300" class="axis"/>
+  <path d="M130 230 C190 225 215 245 270 252 S375 286 430 278 S490 260 520 268" class="line1"/>
+  <text x="115" y="326" class="t">낮게 붙어 있으면 계속 포화 상태</text>
+
+  <rect class="card" x="620" y="125" width="500" height="220"/>
+  <text x="655" y="175" class="m">Queue Depth</text>
+  <line x1="655" y1="300" x2="1065" y2="300" class="axis"/>
+  <line x1="655" y1="205" x2="655" y2="300" class="axis"/>
+  <rect x="690" y="268" width="34" height="32" class="bar"/>
+  <rect x="750" y="252" width="34" height="48" class="bar"/>
+  <rect x="810" y="236" width="34" height="64" class="bar2"/>
+  <rect x="870" y="220" width="34" height="80" class="bar2"/>
+  <rect x="930" y="212" width="34" height="88" class="bar2"/>
+  <rect x="990" y="230" width="34" height="70" class="bar"/>
+  <text x="655" y="326" class="t">queue가 계속 차면 장애를 숨기는 중일 수 있음</text>
+
+  <rect class="card" x="80" y="390" width="500" height="220"/>
+  <text x="115" y="440" class="m">Rejection Rate</text>
+  <line x1="115" y1="565" x2="525" y2="565" class="axis"/>
+  <line x1="115" y1="470" x2="115" y2="565" class="axis"/>
+  <path d="M130 560 C210 558 250 555 300 520 S390 485 520 492" class="line3"/>
+  <text x="115" y="592" class="t">단건 예외보다 비율 기반 알람으로 본다</text>
+
+  <rect class="card" x="620" y="390" width="500" height="220"/>
+  <text x="655" y="440" class="m">Latency p95/p99</text>
+  <line x1="655" y1="565" x2="1065" y2="565" class="axis"/>
+  <line x1="655" y1="470" x2="655" y2="565" class="axis"/>
+  <path d="M670 540 C735 530 765 522 820 518 S900 500 950 485 S1020 475 1060 490" class="line2"/>
+  <text x="655" y="592" class="t">거절률과 함께 tail latency가 줄었는지 확인</text>
+</svg>
